@@ -15,16 +15,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_135617) do
   enable_extension "plpgsql"
 
   create_table "school_classes", force: :cascade do |t|
+    t.string "type_of_dance"
+    t.string "level"
     t.bigint "school_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.time "end_of_time"
     t.time "beginning_of_time"
-    t.string "level"
     t.string "day_of_week"
     t.integer "room_number"
     t.string "teacher_name"
-    t.string "type_of_dance"
     t.index ["school_id"], name: "index_school_classes_on_school_id"
   end
 
