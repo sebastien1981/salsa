@@ -1,0 +1,35 @@
+<h1>Schools#new</h1>
+
+<div class="">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-6">
+      <%= simple_form_for(@school) do |f| %>
+        <div class="row">
+          <div class="col-8">
+            <%= f.input :name %>
+          </div>
+          <div class="col-8">
+            <%= f.input :address %>
+          </div>
+          <div class="col-8">
+            <%= f.select :type_of_structure,  options_for_select(%w[ Société Association]) %>
+          </div>
+          <div class="col-8">
+            <%= f.input :approval_number %>
+          </div>
+          <div class="col-8">
+            <%= f.input :phone_number %>
+          </div>
+          <div class="col-8">
+            <%= f.input :address_mail_pdt %>
+          </div>
+          <div class="col-8">
+            <%= f.input :phone_number_pdt %>
+          </div>
+                <%= f.submit  class: "btn btn-super"%>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
