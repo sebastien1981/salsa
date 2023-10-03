@@ -10,27 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_02_093726) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_03_135617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "school_class_teachers", force: :cascade do |t|
-    t.bigint "teacher_id", null: false
-    t.bigint "school_class_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["school_class_id"], name: "index_school_class_teachers_on_school_class_id"
-    t.index ["teacher_id"], name: "index_school_class_teachers_on_teacher_id"
-  end
-
-  create_table "school_class_type_of_dances", force: :cascade do |t|
-    t.bigint "school_class_id", null: false
-    t.bigint "type_of_dance_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["school_class_id"], name: "index_school_class_type_of_dances_on_school_class_id"
-    t.index ["type_of_dance_id"], name: "index_school_class_type_of_dances_on_type_of_dance_id"
-  end
 
   create_table "school_classes", force: :cascade do |t|
     t.bigint "school_id", null: false
@@ -38,18 +20,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_02_093726) do
     t.datetime "updated_at", null: false
     t.time "end_of_time"
     t.time "beginning_of_time"
+    t.string "level"
+    t.string "day_of_week"
+    t.integer "room_number"
+    t.string "teacher_name"
+    t.string "type_of_dance"
     t.index ["school_id"], name: "index_school_classes_on_school_id"
   end
 
   create_table "schools", force: :cascade do |t|
     t.string "name"
-    t.integer "approval_number"
+    t.string "approval_number"
     t.string "phone_number"
     t.string "address_mail_pdt"
     t.string "phone_number_pdt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "school_id"
+    t.string "address"
+    t.string "type_of_structure"
     t.index ["school_id"], name: "index_schools_on_school_id"
   end
 
@@ -86,10 +75,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_02_093726) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "school_class_teachers", "school_classes"
-  add_foreign_key "school_class_teachers", "teachers"
-  add_foreign_key "school_class_type_of_dances", "school_classes"
-  add_foreign_key "school_class_type_of_dances", "type_of_dances"
   add_foreign_key "school_classes", "schools"
   add_foreign_key "schools", "schools"
   add_foreign_key "user_schools", "schools"
