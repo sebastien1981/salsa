@@ -11,22 +11,25 @@ class SchoolsController < ApplicationController
   end
 
   def create
+    school_id = params[:school_id]
     
-    @school = School.new(school_params)
+  
+      @school = School.new(school_params)
     
-    if @school.save
-      @userschool = UserSchool.new(school_id:@school.id, user_id: current_user.id)
-      @userschool.save
-      redirect_to schools_path , notice: "Votre école a bien été crée"
-          
-    else
-      render :new, status: :unprocessable_entity
-    end
+      if @school.save
+        @userschool = UserSchool.new(school_id:@school.id, user_id: current_user.id)
+        @userschool.save
+        redirect_to schools_path , notice: "Votre école a bien été crée"
+      else
+        render :new, status: :unprocessable_entity
+      end
+    #end
   end
 
   private
 
 def school_params
-  params.require(:school).permit(:name, :address, :approval_number, :phone_number, :address_mail_pdt, :phone_number_pdt,:type_of_structure)
+  params.require(:school).permit(:name, :address, :approval_number, :phone_number, :address_mail_pdt, :phone_number_pdt,:type_of_structure,:school_id)
 end
+
 end
