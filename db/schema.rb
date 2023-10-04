@@ -20,8 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_135617) do
     t.bigint "school_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.time "end_of_time"
     t.time "beginning_of_time"
+    t.time "end_of_time"
     t.string "day_of_week"
     t.integer "room_number"
     t.string "teacher_name"
