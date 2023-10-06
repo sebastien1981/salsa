@@ -7,6 +7,9 @@
        
       <%= simple_form_for [@school, @schoolclass] do |f| %>
         <div class="row">
+        <div class="col-8">
+            <%= f.input :school_name %>
+          </div>
            <div class="col-8">Choisisez votre type de dance:
             <%= f.select :type_of_dance, options_for_select(%w[ Cubaine Porto Bachata Kizomba]) %>
           </div>
