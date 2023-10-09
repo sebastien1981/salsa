@@ -14,6 +14,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_135617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "dances", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "school_classes", force: :cascade do |t|
     t.string "type_of_dance"
     t.string "level"
@@ -44,12 +50,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_135617) do
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "type_of_dances", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
