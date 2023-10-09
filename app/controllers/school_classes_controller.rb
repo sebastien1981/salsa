@@ -16,7 +16,7 @@ class SchoolClassesController < ApplicationController
     if @schoolclassestea.any?
       redirect_to new_school_school_class_path(:school_id => @school.id) ,notice: "Ce professeur est déja pris à cette horaire"
     elsif @schoolclassesroom.any?
-      redirect_to new_school_school_class_papath(:school_id => @school.id) ,notice: "La salle est déja réservé à cette horaire dans cette école"
+      redirect_to new_school_school_class_path(:school_id => @school.id) ,notice: "La salle est déja réservé à cette horaire dans cette école"
     else 
       if @schoolclass.save
         redirect_to schools_path , notice: "Votre cours a bien été crée"

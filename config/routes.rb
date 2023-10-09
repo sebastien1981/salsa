@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'teachers/new'
+  get 'teachers/create'
   get 'schools/new'
   devise_for :users
   root to: "pages#home"
@@ -9,4 +11,5 @@ Rails.application.routes.draw do
   resources :schools do
     resources :school_classes
   end
+  resources :teachers
 end
