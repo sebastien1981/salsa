@@ -1,0 +1,17 @@
+<h1>Dances#new</h1>
+<p>Find me in app/views/dances/new.html.erb</p>
+
+<div class="">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-6">
+      <%= simple_form_for(@dance) do |f| %>
+        <div class="row">
+          <div class="col-8">
+            <%= f.input :fullname %>
+          </div>
+          <%= f.submit  class: "btn btn-super"%>
+      <% end %>
+    </div>
+  </div>
+</div>
+

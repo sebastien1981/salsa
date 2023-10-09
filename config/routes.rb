@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get 'type_of_dances/new'
-  get 'type_of_dances/create'
-  get 'typeofdances/new'
+  get 'dances/new'
   get 'teachers/new'
   get 'schools/new'
   devise_for :users
@@ -14,4 +12,5 @@ Rails.application.routes.draw do
     resources :school_classes
   end
   resources :teachers
+  resources :dances
 end
