@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  get 'type_of_dances/new'
+  get 'type_of_dances/create'
+  get 'typeofdances/new'
   get 'teachers/new'
-  get 'teachers/create'
   get 'schools/new'
   devise_for :users
   root to: "pages#home"
