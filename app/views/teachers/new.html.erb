@@ -1,0 +1,19 @@
+<h1>Teachers#new</h1>
+<p>Find me in app/views/teachers/new.html.erb</p>
+
+<div class="">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-6">
+      <%= simple_form_for(@teacher) do |f| %>
+        <div class="row">
+          <div class="col-8">
+            <%= f.input :name %>
+          </div>
+          <%= f.submit  class: "btn btn-super"%>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
