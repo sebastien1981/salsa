@@ -4,13 +4,12 @@
 <div class="">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
-       
       <%= simple_form_for [@school, @schoolclass] do |f| %>
         <div class="row">
         <div class="col-8">
             <%= f.input :school_name %>
           </div>
-           <div class="col-8">Choisisez votre type de dance:
+          <div class="col-8">Choisisez votre type de dance:
             <%= f.collection_select :type_of_dance, Dance.all, :fullname, :fullname,prompt: true %>
           </div>
           <div class="col-8">Choisisez votre niveau:
@@ -30,7 +29,7 @@
             <%= f.input :room_number %>
           </div>
           <div  class="col-8">Choisisez votre Professeur de dance:
-            <%= f.collection_select :teacher_name, Teacher.all, :name, :name,prompt: true %>
+            <%= f.collection_select :teacher_name, Teacher.all,->(p){ "#{p.first_name} #{p.last_name}" },->(p){ "#{p.first_name} #{p.last_name}" },prompt: true %>
           </div>
           
           

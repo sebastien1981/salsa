@@ -7,13 +7,25 @@
       <%= simple_form_for(@teacher) do |f| %>
         <div class="row">
           <div class="col-8">
-            <%= f.input :name %>
+            <%= f.input :first_name %>
+          </div>
+          <div class="col-8">
+            <%= f.input :last_name %>
+          </div>
+          <div class="col-8">
+            <%= f.input :date_of_birth %>
+          </div>
+          <div class="col-8">
+            <%= f.input :phone_number %>
+          </div>
+          <div class="col-8">
+            <%= f.input :address_mail %>
+          </div>
+          <div class="col-8">
+            <%= f.collection_check_boxes(:specialty, Dance.all,:fullname,:fullname,checked: true) %>
           </div>
           <%= f.submit  class: "btn btn-super"%>
       <% end %>
     </div>
   </div>
 </div>
-
-
-

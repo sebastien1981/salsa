@@ -1,4 +1,11 @@
 class TeachersController < ApplicationController
+  
+  def index
+  end
+
+  def show
+  end
+
   def new
     @teacher = Teacher.new
   end
@@ -12,9 +19,15 @@ class TeachersController < ApplicationController
     end 
   end
 
+  def update
+  end
+
+  def delete
+  end
+
   private 
   
   def teacher_params
-    params.require(:teacher).permit(:name)
+    params.require(:teacher).permit(:first_name,:last_name,:date_of_birth,:phone_number,:address_mail,specialty:[])
   end
 end
