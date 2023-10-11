@@ -5,7 +5,8 @@ class TeachersController < ApplicationController
   end
 
   def show
-    @teacher.specialty = @teacher.specialty.delete('[]')[1..-1]
+    @teacher.specialty = @teacher.specialty.delete('\\"').delete('[]')[1..-1]
+    
   end
 
   def new
@@ -32,7 +33,11 @@ class TeachersController < ApplicationController
     @teacher.update(teacher_params)
     
     @teacher.specialty = @teacher.specialty.delete('\\"')
-    redirect_to teacher_path(@teacher)
+    if @teacher.specialty == "[]"
+      redirect_to edit_teacher_path(@teacher), notice: "Veuillez chosir une specialité"
+    else
+      redirect_to teacher_path(@teacher)
+    end
   end
 
   def destroy
