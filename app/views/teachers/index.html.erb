@@ -1,0 +1,7 @@
+<h1>Tous mes profs</h1>
+<ul>
+  <% @teachers.each do |teacher| %>
+    <li><%= link_to teacher.first_name, teacher_path(teacher)  %></li>
+  <% end %>
+</ul>
+<%= link_to "Créer un nouveau prof pour l'ecole", teachers_new_path %>
