@@ -3,7 +3,9 @@
 <p><%= @teacher.date_of_birth %></p>
 <p><%= @teacher.phone_number %></p>
 <p><%= @teacher.address_mail %></p>
-<p><%= @teacher.specialty %></p>
+<p><% @teacher.specialty.split(',').each do |t| %></p>
+<p><%= t %></p>
+<p><% end %></p>
 <%= link_to "Retour à l'index des profs", teachers_path %>
 <%= link_to "Mettre à jour ce professeur",edit_teacher_path(@teacher) %>
 <%= link_to "Delete",
