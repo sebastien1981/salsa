@@ -11,7 +11,6 @@ class TeachersController < ApplicationController
   def create
   
     @teacher = Teacher.new(teacher_params)
-    #@teacher.specialty = @teacher.specialty.lstrip
     @teacher.specialty = @teacher.specialty.delete('\\"').delete('[]')[1..-1]
 
     if @teacher.specialty == nil
@@ -66,7 +65,6 @@ class TeachersController < ApplicationController
           arr << t.fullname 
         end
       end
-      
 
       @teacher.specialty = arr
     end
@@ -83,9 +81,29 @@ class TeachersController < ApplicationController
       redirect_to edit_teacher_path(@teacher), notice: "Veuillez chosir une specialité"
 
     elsif @teacher.specialty != "[]"
-      @teacher.specialty = @teacher.specialty.delete('\\"').delete('[]')[1..-1].lstrip
+
+      #recuperation dance_id pour l'insert dans la table TeacherDance
+      # spec_array = []
+      # dance_array = []
+      # @teacher.specialty = @teacher.specialty.split(',').each do|spea|
+      #   spec_array << spea.lstrip
+      #   @dance = Dance.find_by(fullname:spea.lstrip)
+      #   dance_array << @dance.id
+      # end
       
+      # @teacher.specialty = spec_array 
+      # @dance = dance_array
+      
+      # #@teacher.save
+      # @dance.each do|dan|
+        
+      #   @teacherdance = TeacherDance.update(teacher_id:@teacher.id, dance_id: dan).where(teacher_id:@teacher.id)
+      #   #@teacherdance.save
+      # end
+      # raise
+
       @teacher.update(teacher_params)
+
       redirect_to teacher_path(@teacher), notice: "Vous avez mis à jour votre professeur"
     end
   end
