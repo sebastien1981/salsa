@@ -11,6 +11,7 @@ class TeachersController < ApplicationController
   def create
   
     @teacher = Teacher.new(teacher_params)
+    
     @teacher.specialty = @teacher.specialty.delete('\\"').delete('[]')[1..-1]
 
     if @teacher.specialty == nil
@@ -75,7 +76,8 @@ class TeachersController < ApplicationController
 
   def update
     
-    @teacher.specialty = @teacher.specialty.delete('\\"').delete('[]')[1..-1]
+    @teacher.specialty = @teacher.specialty.delete('\\"').delete('[]')[1..-1].lstrip
+    raise
     
     if @teacher.specialty == "[]"
       redirect_to edit_teacher_path(@teacher), notice: "Veuillez chosir une specialité"
