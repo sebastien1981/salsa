@@ -82,27 +82,50 @@ class TeachersController < ApplicationController
 
     elsif @teacher.specialty != "[]"
 
-      #recuperation dance_id pour l'insert dans la table TeacherDance
-      # spec_array = []
-      # dance_array = []
-      # @teacher.specialty = @teacher.specialty.split(',').each do|spea|
-      #   spec_array << spea.lstrip
-      #   @dance = Dance.find_by(fullname:spea.lstrip)
-      #   dance_array << @dance.id
-      # end
-      
-      # @teacher.specialty = spec_array 
-      # @dance = dance_array
-      
-      # #@teacher.save
-      # @dance.each do|dan|
-        
-      #   @teacherdance = TeacherDance.update(teacher_id:@teacher.id, dance_id: dan).where(teacher_id:@teacher.id)
-      #   #@teacherdance.save
-      # end
-      # raise
-
       @teacher.update(teacher_params)
+      #recuperation dance_id pour l'insert dans la table TeacherDance
+      spec_array = []
+      dance_array = []
+
+
+      @teacher.specialty.delete('\\"').delete('[]')[1..-1].split(',').each do|spea|
+      #@teacher.specialty.split(',')[1..-1]
+        spec_array << spea.lstrip
+        @dance = Dance.find_by(fullname:spea.lstrip)
+        dance_array << @dance.id
+      end
+      
+      @teacher.specialty = spec_array 
+      
+      @dance = dance_array
+
+      @teacherdancee = TeacherDance.where(teacher_id: @teacher.id)
+      arr_id = []
+      @teacherdancee.each do |t|
+        arr_id << t.dance_id
+      end
+
+      new_arr = []
+      #regroupe par key, value, puis filtre 
+      new_arr = arr_id.concat(dance_array).tally.filter_map {|key, value| key if value == 1 }
+      if new_arr != []
+        new_arr.each do |spetodelete|
+          @delete = TeacherDance.where(teacher_id:@teacher.id, dance_id: spetodelete)
+          if @delete.any?
+            @delete.each do |delete|
+              @idtodelete = TeacherDance.delete(delete.id)
+            end
+          end
+        end
+      end  
+
+      @dance.each do|dan|
+        @teacherdanceexist = TeacherDance.where(teacher_id:@teacher.id, dance_id: dan)
+        if @teacherdanceexist.count == 0
+          @teacherdance = TeacherDance.new(teacher_id:@teacher.id, dance_id: dan)
+          @teacherdance.save
+        end
+      end
 
       redirect_to teacher_path(@teacher), notice: "Vous avez mis à jour votre professeur"
     end
