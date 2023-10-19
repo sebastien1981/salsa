@@ -29,7 +29,7 @@ class SchoolsController < ApplicationController
   private
 
 def school_params
-  params.require(:school).permit(:name, :address, :approval_number, :phone_number, :address_mail_pdt, :phone_number_pdt,:type_of_structure,:school_id)
+  params.require(:school).permit(:name, :address, :approval_number, :phone_number, :address_mail_pdt, :phone_number_pdt,:type_of_structure,:number_room,:school_id)
 end
 
 end

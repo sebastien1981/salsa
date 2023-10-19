@@ -31,8 +31,6 @@
           <div  class="col-8">Choisisez votre Professeur de dance:
             <%= f.collection_select :teacher_name, Teacher.all,->(p){ "#{p.first_name} #{p.last_name}" },->(p){ "#{p.first_name} #{p.last_name}" },prompt: true %>
           </div>
-
-
             <%= f.submit  class: "btn btn-super"%>
       <% end %>
 
