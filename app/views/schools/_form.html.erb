@@ -30,10 +30,11 @@
           <div class="col-8">
             <%=  f.hidden_field :school_id,  :value => params[:school_id] %>
           </div>
+          <div class="col-8">
+            <%= f.input :number_room %>
+          </div>
                 <%= f.submit  class: "btn btn-super"%>
       <% end %>
     </div>
   </div>
 </div>
-
-
