@@ -25,11 +25,11 @@
           <div class="col-8">Choisisez le jour de votre cours:
             <%= f.select :day_of_week , options_for_select(%w[Dimanche Lundi Mardi Mercredi Jeudi Vendredi Samedi]) %>
           </div>
-          <div class="col-8">
-            <%= f.input :room_number %>
-          </div>
           <div  class="col-8">Choisisez votre Professeur de dance:
             <%= f.collection_select :teacher_name, Teacher.all,->(p){ "#{p.first_name} #{p.last_name}" },->(p){ "#{p.first_name} #{p.last_name}" },prompt: true %>
+          </div>
+          <div  class="col-8">Choisisez votre Piece:
+            <%= f.collection_select :room_number, School.all,:number_room,:number_room,prompt: true %>
           </div>
             <%= f.submit  class: "btn btn-super"%>
       <% end %>
