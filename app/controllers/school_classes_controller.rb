@@ -6,25 +6,25 @@ class SchoolClassesController < ApplicationController
   end
 
   def create
-    
+
     @schoolclass = SchoolClass.new(schoolclass_params)
-    @schoolclass.school = @school 
+    @schoolclass.school = @school
     @schoolclassesroom = SchoolClass.where(beginning_of_time: @schoolclass.beginning_of_time, end_of_time: @schoolclass.end_of_time, room_number: @schoolclass.room_number, day_of_week: @schoolclass.day_of_week, school_name: @schoolclass.school_name)
     @schoolclassestea = SchoolClass.where(beginning_of_time: @schoolclass.beginning_of_time, end_of_time: @schoolclass.end_of_time, teacher_name: @schoolclass.teacher_name, day_of_week: @schoolclass.day_of_week)
-    
-    
+
+
     if @schoolclassestea.any?
-      redirect_to new_school_school_class_path(:school_id => @school.id) ,notice: "Ce professeur est déja pris à cette horaire"
+      redirect_to new_school_school_class_path(:school_id => @school.id) ,notice: "#{@schoolclass.teacher_name} est déja pris à cette horaire"
     elsif @schoolclassesroom.any?
       redirect_to new_school_school_class_path(:school_id => @school.id) ,notice: "La salle est déja réservé à cette horaire dans cette école"
-    else 
+    else
       if @schoolclass.save
         redirect_to schools_path , notice: "Votre cours a bien été crée"
       else
          render :new, status: :unprocessable_entity
       end
     end
-    
+
   end
 
   private

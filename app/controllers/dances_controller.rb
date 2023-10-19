@@ -6,7 +6,7 @@ class DancesController < ApplicationController
   def create
     @dance = Dance.new(dance_params)
     if @dance.save
-      redirect_to schools_path, notice: "Vous avez bien crée un nouveau type de dance"
+      redirect_to schools_path, notice: "Vous avez bien crée un nouveau type de dance:#{@dance.fullname}"
     else
       render :new, status: :unprocessable_entity
     end
