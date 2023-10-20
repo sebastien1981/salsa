@@ -10,7 +10,10 @@
             <%= f.input :name %>
           </div>
           <div class="col-8">
-            <%= f.input :address %>
+            <%= f.input :address,
+              input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
+              wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}
+            %>
           </div>
           <div class="col-8">
             <%= f.select :type_of_structure,  options_for_select(%w[ Société Association]) %>

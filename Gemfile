@@ -77,3 +77,9 @@ group :test do
   gem "selenium-webdriver"
 
 end
+
+gem "geocoder"
+gem "faker"
+gem "cloudinary"
+gem 'active_storage_validations'
+gem "algoliasearch-rails"

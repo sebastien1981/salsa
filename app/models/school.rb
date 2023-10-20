@@ -4,6 +4,9 @@ class School < ApplicationRecord
   has_many :users, through: :user_schools
   has_many :school_classes
 
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+
   VALID_EMAIL_REGEX= /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
 
   validates :name,:address,:type_of_structure,:approval_number,:phone_number,:address_mail_pdt,:phone_number_pdt,:number_room,  presence: true
