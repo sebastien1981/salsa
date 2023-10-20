@@ -30,13 +30,16 @@ class TeachersController < ApplicationController
       @teacher.specialty = spec_array
       @dance = dance_array
 
-      @teacher.save
-      @dance.each do|dan|
+      if @teacher.save
+        @dance.each do|dan|
 
-        @teacherdance = TeacherDance.new(teacher_id:@teacher.id, dance_id: dan)
-        @teacherdance.save
-      end
+          @teacherdance = TeacherDance.new(teacher_id:@teacher.id, dance_id: dan)
+          @teacherdance.save
+        end
       redirect_to schools_path, notice: "Vous avez bien crée le professeur: #{@teacher.first_name} #{@teacher.last_name}"
+      else
+        render :new, status: :unprocessable_entity
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -129,13 +132,13 @@ class TeachersController < ApplicationController
         end
       end
 
-      redirect_to teacher_path(@teacher), notice: "Vous avez mis à jour votre professeur  #{@teacher.first_name} #{@teacher.last_name}"
+      redirect_to teacher_path(@teacher), notice: "Vous avez mis à jour votre professeur"
     end
   end
 
   def destroy
     @teacher.destroy
-    redirect_to teachers_path, status: :see_other, notice: "Vous avez supprimé ce professeur  #{@teacher.first_name} #{@teacher.last_name}"
+    redirect_to teachers_path, status: :see_other, notice: "Vous avez supprimé ce professeur"
   end
 
   private
