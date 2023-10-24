@@ -9,16 +9,16 @@ class TeachersController < ApplicationController
   end
 
   def create
-
     @teacher = Teacher.new(teacher_params)
 
     @teacher.specialty = @teacher.specialty.delete('\\"').delete('[]')[1..-1]
+    @teacher.specialty = @teacher.specialty[1..-1]
 
     if @teacher.specialty == nil
       redirect_to new_teacher_path, notice: "Veuillez chosir une specialité"
     elsif @teacher.specialty != nil
 
-      #recuperation dance_id pour l'insert dans la table TeacherDance
+      # recuperation dance_id pour l'insert dans la table TeacherDance
       spec_array = []
       dance_array = []
       @teacher.specialty = @teacher.specialty.split(',').each do|spea|
@@ -31,12 +31,12 @@ class TeachersController < ApplicationController
       @dance = dance_array
 
       if @teacher.save
-        @dance.each do|dan|
+        @dance.each do |dan|
 
           @teacherdance = TeacherDance.new(teacher_id:@teacher.id, dance_id: dan)
           @teacherdance.save
         end
-      redirect_to schools_path, notice: "Vous avez bien crée le professeur: #{@teacher.first_name} #{@teacher.last_name}"
+        redirect_to schools_path, notice: "Vous avez bien crée le professeur: #{@teacher.first_name} #{@teacher.last_name}"
       else
         render :new, status: :unprocessable_entity
       end
@@ -46,31 +46,10 @@ class TeachersController < ApplicationController
   end
 
   def show
-    if @teacher.specialty == nil
+    if @teacher.specialty == nil?
       redirect_to edit_teacher_path(@teacher), notice: "Veuillez chosir une specialité"
     else
-      @teacher
-
-      dance_arr = []
-
-      @teacherdance = TeacherDance.where(teacher_id: @teacher.id)
-      countel = @teacherdance.count
-
-      for n in 0...countel
-        dance_arr << Dance.where(id:@teacherdance[n].dance_id)
-      end
-
-      counttotal = dance_arr.count
-
-      arr = []
-
-      for n in 0...counttotal
-        dance_arr[n].each do |t|
-          arr << t.fullname
-        end
-      end
-
-      @teacher.specialty = arr
+      set_teacherdance
     end
   end
 
@@ -78,23 +57,30 @@ class TeachersController < ApplicationController
   end
 
   def update
+    #set_teacherdance
+    # arr_spe = []
+    # @teacher.specialty.delete("[]").delete('"').split(',').each do |t|
+    #   arr_spe << t.lstrip
+    # end
+    #@teacher.specialty = arr_spe
 
-    @teacher.specialty = @teacher.specialty.delete('\\"').delete('[]')[1..-1].lstrip
-
+    @teacher.specialty = @teacher.specialty.delete('\\"')
 
     if @teacher.specialty == "[]"
       redirect_to edit_teacher_path(@teacher), notice: "Veuillez chosir une specialité"
 
     elsif @teacher.specialty != "[]"
 
+      #@teacher.specialty = @teacher.specialty.delete('\\"').delete('[]')[1..-1].lstrip
+
       @teacher.update(teacher_params)
-      #recuperation dance_id pour l'insert dans la table TeacherDance
+      # recuperation dance_id pour l'insert dans la table TeacherDance
       spec_array = []
       dance_array = []
 
 
       @teacher.specialty.delete('\\"').delete('[]')[1..-1].split(',').each do|spea|
-      #@teacher.specialty.split(',')[1..-1]
+    # @teacher.specialty.split(',')[1..-1]
         spec_array << spea.lstrip
         @dance = Dance.find_by(fullname:spea.lstrip)
         dance_array << @dance.id
@@ -124,7 +110,7 @@ class TeachersController < ApplicationController
         end
       end
 
-      @dance.each do|dan|
+      @dance.each do |dan|
         @teacherdanceexist = TeacherDance.where(teacher_id:@teacher.id, dance_id: dan)
         if @teacherdanceexist.count == 0
           @teacherdance = TeacherDance.new(teacher_id:@teacher.id, dance_id: dan)
@@ -149,5 +135,26 @@ class TeachersController < ApplicationController
 
   def set_teacher
     @teacher = Teacher.find(params[:id])
+  end
+
+  def set_teacherdance
+    dance_arr = []
+    @teacherdance = TeacherDance.where(teacher_id: @teacher.id)
+    countel = @teacherdance.count
+
+    for n in 0...countel
+      dance_arr << Dance.where(id:@teacherdance[n].dance_id)
+    end
+
+    counttotal = dance_arr.count
+
+    arr = []
+
+    for n in 0...counttotal
+      dance_arr[n].each do |t|
+        arr << t.fullname
+      end
+    end
+    @teacher.specialty = arr
   end
 end
