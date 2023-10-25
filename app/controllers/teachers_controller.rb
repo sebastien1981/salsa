@@ -12,8 +12,8 @@ class TeachersController < ApplicationController
     @teacher = Teacher.new(teacher_params)
 
     @teacher.specialty = @teacher.specialty.delete('\\"').delete('[]')[1..-1]
-    @teacher.specialty = @teacher.specialty[1..-1]
-
+    #@teacher.specialty = @teacher.specialty[1..-1]
+    
     if @teacher.specialty == nil
       redirect_to new_teacher_path, notice: "Veuillez chosir une specialité"
     elsif @teacher.specialty != nil
@@ -29,10 +29,14 @@ class TeachersController < ApplicationController
 
       @teacher.specialty = spec_array
       @dance = dance_array
+      #@teacher.specialty = @teacher.specialty.delete('\\"')
+
+      #"[\"\", \"salsa cubaine\"]"
+        #"[\"\", \"salsa cubaine\", \"kizumba\"]"
+        # "[\"\", \"salsa cubaine\", \"kizumba\", \"Timba\"]"
 
       if @teacher.save
         @dance.each do |dan|
-
           @teacherdance = TeacherDance.new(teacher_id:@teacher.id, dance_id: dan)
           @teacherdance.save
         end
@@ -49,7 +53,24 @@ class TeachersController < ApplicationController
     if @teacher.specialty == nil?
       redirect_to edit_teacher_path(@teacher), notice: "Veuillez chosir une specialité"
     else
-      set_teacherdance
+      dance_arr = []
+    @teacherdance = TeacherDance.where(teacher_id: @teacher.id)
+    countel = @teacherdance.count
+
+    for n in 0...countel
+      dance_arr << Dance.where(id:@teacherdance[n].dance_id)
+    end
+
+    counttotal = dance_arr.count
+
+    arr = []
+
+    for n in 0...counttotal
+      dance_arr[n].each do |t|
+        arr << t.fullname
+      end
+    end
+      @teacher.specialty = arr
     end
   end
 
@@ -57,23 +78,19 @@ class TeachersController < ApplicationController
   end
 
   def update
-    #set_teacherdance
-    # arr_spe = []
-    # @teacher.specialty.delete("[]").delete('"').split(',').each do |t|
-    #   arr_spe << t.lstrip
-    # end
-    #@teacher.specialty = arr_spe
 
-    @teacher.specialty = @teacher.specialty.delete('\\"')
-
-    if @teacher.specialty == "[]"
+    if @teacher.specialty == nil
       redirect_to edit_teacher_path(@teacher), notice: "Veuillez chosir une specialité"
 
     elsif @teacher.specialty != "[]"
 
       #@teacher.specialty = @teacher.specialty.delete('\\"').delete('[]')[1..-1].lstrip
+      if @teacher.specialty == "[\"\"]"
 
-      @teacher.update(teacher_params)
+        redirect_to edit_teacher_path(@teacher), notice: "Veuillez chosir une specialité"
+      else
+
+        @teacher.update(teacher_params)
       # recuperation dance_id pour l'insert dans la table TeacherDance
       spec_array = []
       dance_array = []
@@ -119,7 +136,10 @@ class TeachersController < ApplicationController
       end
 
       redirect_to teacher_path(@teacher), notice: "Vous avez mis à jour votre professeur"
-    end
+
+      end#end else
+
+    end#end elseif
   end
 
   def destroy
@@ -135,26 +155,5 @@ class TeachersController < ApplicationController
 
   def set_teacher
     @teacher = Teacher.find(params[:id])
-  end
-
-  def set_teacherdance
-    dance_arr = []
-    @teacherdance = TeacherDance.where(teacher_id: @teacher.id)
-    countel = @teacherdance.count
-
-    for n in 0...countel
-      dance_arr << Dance.where(id:@teacherdance[n].dance_id)
-    end
-
-    counttotal = dance_arr.count
-
-    arr = []
-
-    for n in 0...counttotal
-      dance_arr[n].each do |t|
-        arr << t.fullname
-      end
-    end
-    @teacher.specialty = arr
   end
 end
