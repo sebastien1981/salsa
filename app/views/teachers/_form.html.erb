@@ -2,7 +2,7 @@
 <p>Find me in app/views/teachers/edit.html.erb</p>
 
 <div class="">
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" >
     <div class="col-12 col-lg-6">
       <%= simple_form_for(@teacher) do |f| %>
         <div class="row">
@@ -24,10 +24,10 @@
           <div>Si vous ne trouvez pas le type dance que vous cherchez, cliquez sur le lien suivant:</div>
           <%= link_to "Ajouter un nouveau type de dance", new_dance_path %>
           <div>Choisissez vos spécialités:</div>
-          <div class="col-8">
-            <%= f.collection_check_boxes(:specialty, Dance.all,:fullname,:fullname) %>
+          <div class="col-8" >
+            <%= f.association :dances, as: :check_boxes, label_method: :fullname %>
           </div>
-          <%= f.submit  class: "btn btn-super"%>
+          <%= f.submit class: "btn btn-super"%>
       <% end %>
     </div>
   </div>
