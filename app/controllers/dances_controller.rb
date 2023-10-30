@@ -1,4 +1,5 @@
 class DancesController < ApplicationController
+  autocomplete :dances, :fullname
   def new
     @dance = Dance.new
   end

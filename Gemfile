@@ -84,3 +84,4 @@ gem "cloudinary"
 gem 'active_storage_validations'
 gem "algoliasearch-rails"
 gem "timepicker-addon-rails"
+gem "rails-autocomplete"

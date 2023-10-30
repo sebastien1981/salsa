@@ -23,9 +23,11 @@
           </div>
           <div>Si vous ne trouvez pas le type dance que vous cherchez, cliquez sur le lien suivant:</div>
           <%= link_to "Ajouter un nouveau type de dance", new_dance_path %>
-          <div>Choisissez vos spécialités:</div>
           <div class="col-8" >
-            <%= f.association :dances, as: :check_boxes, label_method: :fullname %>
+            <%= f.association :dances,
+                             as: :check_boxes,
+                             label_method: :fullname,
+                             :label => "Choisissez vos spécialités:" %>
           </div>
           <%= f.submit class: "btn btn-super"%>
       <% end %>
