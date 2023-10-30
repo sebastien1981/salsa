@@ -2,6 +2,8 @@ class DancesController < ApplicationController
   autocomplete :dances, :fullname
   def new
     @dance = Dance.new
+    @teachers = Teacher.pluck(:first_name)
+    #@skills = Skill.pluck(:name)
   end
 
   def create
