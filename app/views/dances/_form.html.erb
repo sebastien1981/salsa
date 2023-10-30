@@ -9,6 +9,7 @@
           <div class="col-8">
             <%= f.input :fullname %>
           </div>
+          <div><%= f.input :fullname, as: :autocomplete, source: autocomplete_dances_path %></div>
           <%= f.submit  class: "btn btn-super"%>
       <% end %>
     </div>

@@ -20,28 +20,6 @@ class TeachersController < ApplicationController
   end
 
   def show
-    if @teacher.specialty == nil?
-      redirect_to edit_teacher_path(@teacher), notice: "Veuillez chosir une specialité"
-    else
-      dance_arr = []
-      @teacherdance = TeacherDance.where(teacher_id: @teacher.id)
-      countel = @teacherdance.count
-
-      for n in 0...countel
-        dance_arr << Dance.where(id:@teacherdance[n].dance_id)
-      end
-
-      counttotal = dance_arr.count
-
-      arr = []
-
-      for n in 0...counttotal
-        dance_arr[n].each do |t|
-          arr << t.fullname
-        end
-      end
-      @teacher.specialty = arr
-    end
   end
 
   def edit
