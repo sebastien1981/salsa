@@ -19,7 +19,7 @@ class SchoolsController < ApplicationController
       if @school.save
         @userschool = UserSchool.new(school_id:@school.id, user_id: current_user.id)
         @userschool.save
-        redirect_to schools_path , notice: "Votre école a bien été crée: #{@school.name}"
+        redirect_to schools_path, notice: "Votre école a bien été crée: #{@school.name}"
       else
         render :new, status: :unprocessable_entity
       end

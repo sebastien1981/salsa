@@ -1,13 +1,14 @@
-<ul>
-  <% @schools.each do |school| %>
-    <li><%= school.name %></li>
-    <li><%= school.id %></li>
-    <%= link_to "Créer vos sites supplémentaires", schools_new_path(:school_id => school.id) %>
-    <%= link_to "Créer vos planning", new_school_school_class_path(:school_id => school.id) %>
-    <%= link_to "Acceder au listing des professeurs", teachers_path %>
-    <%= link_to "Ajouter un nouveau type de danse", new_dance_path %>
-
-  <% end %>
-</ul>
-
-<%= link_to "Créer votre école", schools_new_path %>
+<% if current_user.schools.any? %>
+  <ul>
+    <% current_user.schools.each do |school| %>
+      <li><%= school.name %></li>
+      <li><%= school.id %></li>
+      <%= link_to "Créer vos sites supplémentaires", schools_new_path(:school_id => school.id) %>
+      <%= link_to "Créer vos planning", new_school_school_class_path(:school_id => school.id) %>
+      <%= link_to "Acceder au listing des professeurs", teachers_path %>
+      <%= link_to "Ajouter un nouveau type de danse", new_dance_path %>
+    <% end %>
+  </ul>
+<% else %>
+  <%= link_to "Créer votre école", schools_new_path %>
+<% end  %>
