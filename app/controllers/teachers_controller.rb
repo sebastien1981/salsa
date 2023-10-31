@@ -5,13 +5,14 @@ class TeachersController < ApplicationController
   end
 
   def new
+    #@school = School.find(params[:school_id])
     @teacher = Teacher.new
     @dances = Dance.all
   end
 
   def create
     @teacher = Teacher.new(teacher_params)
-    
+
 
     if @teacher.save
       redirect_to schools_path, notice: "Vous avez bien crée le professeur: #{@teacher.first_name} #{@teacher.last_name}"
