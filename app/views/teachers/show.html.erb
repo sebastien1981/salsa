@@ -6,9 +6,5 @@
 <p><% @teacher.dances.each do |dance| %></p>
 <p><%= dance.fullname %></p>
 <p><% end %></p>
-<%= link_to "Retour à l'index des profs", teachers_path %>
-<%= link_to "Mettre à jour ce professeur",edit_teacher_path(@teacher) %>
-<%= link_to "Delete",
-  teacher_path(@teacher),
-  data: {turbo_method: :delete, turbo_confirm: "Etes-vous sure de vouloir supprimer ce proffeseur?"}
-%>
+<%= link_to "Retour à l'index des profs", school_teachers_path %>
+<%= link_to "Mettre à jour ce professeur",edit_school_teacher_path(@teacher) %>

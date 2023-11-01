@@ -6,13 +6,13 @@
         <li><%= school.id %></li>
         <%= link_to "Créer vos sites supplémentaires", schools_new_path(:school_id => school.id) %>
         <%= link_to "Créer vos planning", new_school_school_class_path(:school_id => school.id) %>
-        <%= link_to "Acceder au listing des professeurs", teachers_path %>
+        <%= link_to "Acceder au listing des professeurs", school_teachers_path(:school_id => school.id) %>
         <%= link_to "Ajouter un nouveau type de danse", new_dance_path %>
       <% else %>
         <li><%= school.name %></li>
         <li><%= school.id %></li>
         <%= link_to "Créer vos planning", new_school_school_class_path(:school_id => school.id) %>
-        <%= link_to "Acceder au listing des professeurs", teachers_path %>
+        <%= link_to "Acceder au listing des professeurs", school_teachers_path(:school_id => school.id) %>
         <%= link_to "Ajouter un nouveau type de danse", new_dance_path %>
       <% end  %>
     <% end %>

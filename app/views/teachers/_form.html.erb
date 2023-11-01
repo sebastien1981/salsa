@@ -4,7 +4,7 @@
 <div class="">
   <div class="row justify-content-center" >
     <div class="col-12 col-lg-6">
-      <%= simple_form_for(@teacher) do |f| %>
+      <%= simple_form_for [@school, @teacher] do |f| %>
         <div class="row">
           <div class="col-8">
             <%= f.input :first_name %>
