@@ -5,17 +5,19 @@ class TeachersController < ApplicationController
   end
 
   def new
-    #@school = School.find(params[:school_id])
+    @school = School.find(params[:school_id])
     @teacher = Teacher.new
     @dances = Dance.all
   end
 
   def create
     @teacher = Teacher.new(teacher_params)
-
+    @school = School.find(params[:school_id])
 
     if @teacher.save
-      redirect_to schools_path, notice: "Vous avez bien crée le professeur: #{@teacher.first_name} #{@teacher.last_name}"
+      @schoolteacher = SchoolTeacher.new(school_id:@school.id, teacher_id: @teacher.id)
+      @schoolteacher.save
+      redirect_to school_teachers_path, notice: "Vous avez bien crée le professeur: #{@teacher.first_name} #{@teacher.last_name}"
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,16 +27,12 @@ class TeachersController < ApplicationController
   end
 
   def edit
+    @school = School.find(params[:school_id])
   end
 
   def update
     @teacher.update(teacher_params)
-    redirect_to teacher_path(@teacher), notice: "Vous avez bien crée le professeur: #{@teacher.first_name} #{@teacher.last_name}"
-  end
-
-  def destroy
-    @teacher.destroy
-    redirect_to teachers_path, status: :see_other, notice: "Vous avez supprimé ce professeur"
+    redirect_to school_teacher_path(@teacher), notice: "Vous avez bien mis à jour le professeur: #{@teacher.first_name} #{@teacher.last_name}"
   end
 
   private
