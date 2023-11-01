@@ -2,6 +2,7 @@ class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
   def index
     @teachers = Teacher.all
+    @school = School.find(params[:school_id])
   end
 
   def new
