@@ -27,7 +27,6 @@ class TeachersController < ApplicationController
 
   def show
     @school = School.find(params[:school_id])
-    school_id = @school.id
   end
 
   def edit
