@@ -3,7 +3,12 @@ class TeachersController < ApplicationController
 
   def index
     @school = School.find(params[:school_id])
-    @teachers = Teacher.all
+    if @school.school_id != nil
+      school = @school.school_id
+    elsif @school.school_id == nil
+      school = @school.id
+    end
+    @teachers = Teacher.joins("INNER JOIN school_teachers ON school_teachers.teacher_id = teachers.id INNER JOIN schools ON schools.id = school_teachers.school_id where schools.id = '#{school}' ")
   end
 
   def new

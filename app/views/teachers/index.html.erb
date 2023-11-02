@@ -1,9 +1,8 @@
 <h1>Tous mes profs</h1>
-<% if @school.teachers.any? %>
 <ul>
   <% @teachers.each do |teacher| %>
   <li><%= link_to teacher.first_name, school_teacher_path(:id => teacher.id) %></li>
   <% end %>
 </ul>
-<%  end %>
+
 <%= link_to "Créer un nouveau prof pour l'ecole", new_school_teacher_path %>
