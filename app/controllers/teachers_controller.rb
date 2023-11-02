@@ -1,8 +1,9 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+
   def index
-    @teachers = Teacher.all
     @school = School.find(params[:school_id])
+    @teachers = Teacher.all
   end
 
   def new
@@ -12,8 +13,8 @@ class TeachersController < ApplicationController
   end
 
   def create
-    @teacher = Teacher.new(teacher_params)
     @school = School.find(params[:school_id])
+    @teacher = Teacher.new(teacher_params)
 
     if @teacher.save
       @schoolteacher = SchoolTeacher.new(school_id:@school.id, teacher_id: @teacher.id)
@@ -25,6 +26,8 @@ class TeachersController < ApplicationController
   end
 
   def show
+    @school = School.find(params[:school_id])
+    school_id = @school.id
   end
 
   def edit
@@ -32,8 +35,9 @@ class TeachersController < ApplicationController
   end
 
   def update
+    @school = School.find(params[:school_id])
     @teacher.update(teacher_params)
-    redirect_to school_teacher_path(@teacher), notice: "Vous avez bien mis à jour le professeur: #{@teacher.first_name} #{@teacher.last_name}"
+    redirect_to school_teacher_path(@school,@teacher), notice: "Vous avez bien mis à jour le professeur: #{@teacher.first_name} #{@teacher.last_name}"
   end
 
   private
