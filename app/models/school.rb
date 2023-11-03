@@ -3,7 +3,7 @@ class School < ApplicationRecord
   has_many :user_schools
   has_many :users, through: :user_schools
   has_many :school_classes
-  has_many :school_teachers
+  has_many :school_teachers, dependent: :destroy
   has_many :teachers, through: :school_teachers
 
   geocoded_by :address
