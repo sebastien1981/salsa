@@ -8,7 +8,7 @@ class TeachersController < ApplicationController
     elsif @school.school_id == nil
       school = @school.id
     end
-    @teachers = Teacher.joins("INNER JOIN school_teachers ON school_teachers.teacher_id = teachers.id INNER JOIN schools ON schools.id = school_teachers.school_id where schools.id = '#{school}' ")
+    @teachers = Teacher.joins("INNER JOIN school_teachers ON school_teachers.teacher_id = teachers.id INNER JOIN schools ON schools.id = school_teachers.school_id where schools.id = '#{school}' or schools.school_id = '#{school}' ")
   end
 
   def new
