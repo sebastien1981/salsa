@@ -60,9 +60,6 @@ class TeachersController < ApplicationController
   end
   SchoolTeacher.delete(idto)
   redirect_to school_teachers_path(@school), status: :see_other, notice: "Vous venez de supprimer ce #{@teacher.first_name} #{@teacher.last_name} de votre école"
-    #@booking = Booking.find(params[:id])
-    #@booking.destroy
-    #redirect_to bookings_path, status: :see_other
   end
 
   private
