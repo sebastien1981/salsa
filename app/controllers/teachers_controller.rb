@@ -4,6 +4,7 @@ class TeachersController < ApplicationController
   def index
     @school = School.find(params[:school_id])
     if @school.school_id != nil
+      raise
       school = @school.school_id
     elsif @school.school_id == nil
       school = @school.id
