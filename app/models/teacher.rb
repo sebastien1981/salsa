@@ -1,7 +1,7 @@
 class Teacher < ApplicationRecord
   has_many :teacher_dances, dependent: :destroy
   has_many :dances, through: :teacher_dances, dependent: :destroy
-  has_many :school_teachers
+  has_many :school_teachers, dependent: :destroy
   has_many :schools, through: :school_teachers
 
   VALID_EMAIL_REGEX= /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get 'dances/new'
-  get 'teachers/new'
   get 'schools/new'
   devise_for :users
   root to: "schools#index"

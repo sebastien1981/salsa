@@ -44,6 +44,27 @@ class TeachersController < ApplicationController
     redirect_to school_teacher_path(@school,@teacher), notice: "Vous avez bien mis à jour le professeur: #{@teacher.first_name} #{@teacher.last_name}"
   end
 
+  def destroy
+  @school = School.find(params[:school_id])
+  @teacher = Teacher.find(params[:id])
+  if @school.school_id != nil
+    schooltodelete = @school.school_id
+  else
+    schooltodelete = @school.id
+  end
+  teachertodelete = @teacher.id
+  @idtodelete = SchoolTeacher.where(:teacher_id => teachertodelete, :school_id => schooltodelete)
+  idto = []
+  @idtodelete.each do |idtodelete|
+    idto << idtodelete.id
+  end
+  SchoolTeacher.delete(idto)
+  redirect_to school_teachers_path(@school), status: :see_other, notice: "Vous venez de supprimer ce #{@teacher.first_name} #{@teacher.last_name} de votre école"
+    #@booking = Booking.find(params[:id])
+    #@booking.destroy
+    #redirect_to bookings_path, status: :see_other
+  end
+
   private
 
   def teacher_params

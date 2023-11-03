@@ -3,7 +3,3 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
-//= require jquery3
-//= require jquery_ujs
-//= require jquery-ui/widgets/autocomplete
-//= require autocomplete-rails
