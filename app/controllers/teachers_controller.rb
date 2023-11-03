@@ -45,21 +45,23 @@ class TeachersController < ApplicationController
   end
 
   def destroy
-  @school = School.find(params[:school_id])
-  @teacher = Teacher.find(params[:id])
-  if @school.school_id != nil
-    schooltodelete = @school.school_id
-  else
-    schooltodelete = @school.id
-  end
-  teachertodelete = @teacher.id
-  @idtodelete = SchoolTeacher.where(:teacher_id => teachertodelete, :school_id => schooltodelete)
-  idto = []
-  @idtodelete.each do |idtodelete|
-    idto << idtodelete.id
-  end
-  SchoolTeacher.delete(idto)
-  redirect_to school_teachers_path(@school), status: :see_other, notice: "Vous venez de supprimer ce #{@teacher.first_name} #{@teacher.last_name} de votre école"
+    @school = School.find(params[:school_id])
+    @teacher = Teacher.find(params[:id])
+    @idtocatch = School.where("id= '#{@school.id}'or school_id='#{@school.id}'")
+    idschooltodelete = []
+    @idtocatch.each do |idto|
+      idschooltodelete << idto.id
+    end
+    idschooltodelete.each do |schooltodelete|
+      teachertodelete = @teacher.id
+      @idtodelete = SchoolTeacher.where(:teacher_id => teachertodelete, :school_id => schooltodelete)
+      idto = []
+      @idtodelete.each do |idtodelete|
+        idto << idtodelete.id
+      end
+      SchoolTeacher.delete(idto)
+    end
+    redirect_to school_teachers_path(@school), status: :see_other,notice: "Vous venez de supprimer ce #{@teacher.first_name} #{@teacher.last_name} de votre école"
   end
 
   private
