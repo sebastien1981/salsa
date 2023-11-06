@@ -3,6 +3,24 @@ class SchoolClassesController < ApplicationController
 
   def new
     @schoolclass = SchoolClass.new
+    @school = School.find(params[:school_id])
+    @nameschool = School.where(id: @school.id, school_id: @school.school_id)
+    if @school.school_id != nil
+      school = @school.school_id
+    elsif @school.school_id == nil
+      school = @school.id
+    end
+    @teacherstoselect = Teacher.joins("INNER JOIN school_teachers ON school_teachers.teacher_id = teachers.id INNER JOIN schools ON schools.id = school_teachers.school_id where schools.id = '#{school}' or schools.school_id = '#{school}' ")
+    #nombre de room
+
+      x = @school.number_room
+      arrtess = []#pour stocker les valeurs que je souhaite
+      arrtess << x
+      while x > 1
+        x -= 1
+        arrtess << x
+      end
+      @countarr = arrtess
   end
 
   def create
