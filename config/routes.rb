@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :schools do
     resources :school_classes
     resources :teachers
+    get '/advancedsearch', to: 'teachers#advancedsearch'
   end
   resources :dances
 end

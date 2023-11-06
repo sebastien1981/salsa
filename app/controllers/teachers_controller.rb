@@ -64,6 +64,15 @@ class TeachersController < ApplicationController
     redirect_to school_teachers_path(@school), status: :see_other,notice: "Vous venez de supprimer ce #{@teacher.first_name} #{@teacher.last_name} de votre école"
   end
 
+  def advancedsearch
+    @school = School.find(params[:school_id])
+    @teachers = Teacher.all
+    if params[:query].present?
+      raise
+      @teachers = @teachers.where(first_name: params[:query])
+      raise
+    end
+  end
   private
 
   def teacher_params
