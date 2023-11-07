@@ -1,10 +1,11 @@
 class SchoolClass < ApplicationRecord
   belongs_to :school
   validate :check_dates
-  #validates :day_of_week, :school_name, presence: true
   validates :beginning_of_time, :end_of_time, :type_of_dance, presence: true
+  validates :day_of_week, presence: true
+  #:school_name,
 
-  #validate :day_of_week_existing
+  validate :day_of_week_existing
 
 private
 def day_of_week_existing
