@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_31_091417) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_07_164439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_31_091417) do
     t.integer "number_room"
     t.float "longitude"
     t.float "latitude"
+    t.integer "idcreatepl"
     t.index ["school_id"], name: "index_schools_on_school_id"
   end
 

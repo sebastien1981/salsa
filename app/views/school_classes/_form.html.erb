@@ -7,13 +7,13 @@
       <%= simple_form_for [@school, @schoolclass] do |f| %>
         <div class="row">
         <div class="col-8">Choisissez votre école
-            <%= f.collection_select :school_name, @nameschool, :name, :name,prompt: true %>
+            <%= select_tag :school_name,options_for_select(School.where(id: @school.id, school_id: @school.school_id).map{|c|[c.name,c.name]}), {:prompt => "--Choissisez votre école--"} %>
           </div>
           <div class="col-8">Choisisez votre type de dance:
-            <%= f.collection_select :type_of_dance, Dance.all, :fullname, :fullname,prompt: true %>
+            <%= f.collection_select :type_of_dance, Dance.all, :fullname, :fullname,{:prompt => "--Choissisez votre type de dance--"} %>
           </div>
           <div class="col-8">Choisisez votre niveau:
-            <%= f.select :level,  options_for_select(%w[ Débutant Inter1 Inter2 Inter/Conf Confirmé]) %>
+            <%= f.select :level,  options_for_select(%w[ Débutant Inter1 Inter2 Inter/Conf Confirmé]),{:prompt => "--Choissisez votre niveau--"} %>
           </div>
           <div class="col-8">
             <%= f.input :beginning_of_time %>
@@ -22,13 +22,10 @@
             <%= f.input :end_of_time %>
           </div>
           <div class="col-8">Choisisez le jour de votre cours:
-            <%= f.select :day_of_week , options_for_select(%w[Dimanche Lundi Mardi Mercredi Jeudi Vendredi Samedi]) %>
+            <%= f.select :day_of_week , options_for_select(%w[Dimanche Lundi Mardi Mercredi Jeudi Vendredi Samedi]),{:prompt => "--Choissisez le jour de votre cours--"} %>
           </div>
           <div  class="col-8">Choisisez votre Professeur de dance:
-            <%= f.collection_select :teacher_name, @teacherstoselect,->(p){ "#{p.first_name} #{p.last_name}" },->(p){ "#{p.first_name} #{p.last_name}" },prompt: true %>
-          </div>
-          <div  class="col-8">Choisisez votre Piece:
-            <%= f.collection_select :room_number, @countarr, :to_s, :to_s %>
+            <%= select_tag :teacher_name,options_for_select(Teacher.joins("INNER JOIN school_teachers ON school_teachers.teacher_id = teachers.id INNER JOIN schools ON schools.id = school_teachers.school_id where schools.id = #{@school.idcreatepl} or schools.school_id = #{@school.idcreatepl} ").map{|p|["#{p.first_name} #{p.last_name}"]}), {:prompt => "--Choissisez votre professeur--"} %>
           </div>
             <%= f.submit  class: "btn btn-super"%>
       <% end %>
