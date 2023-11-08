@@ -25,8 +25,9 @@
             <%= f.select :day_of_week , options_for_select(%w[Dimanche Lundi Mardi Mercredi Jeudi Vendredi Samedi]),{:prompt => "--Choissisez le jour de votre cours--"} %>
           </div>
           <div  class="col-8">Choisisez votre Professeur de dance:
-            <%= select_tag :teacher_name,options_for_select(Teacher.joins("INNER JOIN school_teachers ON school_teachers.teacher_id = teachers.id INNER JOIN schools ON schools.id = school_teachers.school_id where schools.id = #{@school.idcreatepl} or schools.school_id = #{@school.idcreatepl} ").map{|p|["#{p.first_name} #{p.last_name}"]}), {:prompt => "--Choissisez votre professeur--"} %>
+           <%= select_tag :teacher_name,options_for_select(Teacher.joins("INNER JOIN school_teachers ON school_teachers.teacher_id = teachers.id INNER JOIN schools ON schools.id = school_teachers.school_id where schools.id = #{@school.idcreatepl} or schools.school_id = #{@school.idcreatepl} ").map{|p|["#{p.first_name} #{p.last_name}"]}), {:prompt => "--Choissisez votre professeur--"} %>
           </div>
+
             <%= f.submit  class: "btn btn-super"%>
       <% end %>
 
