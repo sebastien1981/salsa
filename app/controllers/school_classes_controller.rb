@@ -1,5 +1,13 @@
 class SchoolClassesController < ApplicationController
-  before_action :set_school, only: %i[new create]
+  before_action :set_school, only: %i[index new create destroy]
+
+  def index
+    @schoolclasses = SchoolClass.where(school_id: @school.id)
+  end
+
+  def show
+    @schoolclass = SchoolClass.find(params[:id])
+  end
 
   def new
     @schoolclass = SchoolClass.new
@@ -15,7 +23,6 @@ class SchoolClassesController < ApplicationController
     @schoolclassesroom = SchoolClass.where(beginning_of_time: @schoolclass.beginning_of_time, end_of_time: @schoolclass.end_of_time, room_number: @schoolclass.room_number, day_of_week: @schoolclass.day_of_week, school_name: @schoolclass.school_name)
     @schoolclassestea = SchoolClass.where(beginning_of_time: @schoolclass.beginning_of_time, end_of_time: @schoolclass.end_of_time, teacher_name: @schoolclass.teacher_name, day_of_week: @schoolclass.day_of_week)
 
-
     if @schoolclassestea.any?
       redirect_to new_school_school_class_path(:school_id => @school.id) ,notice: "#{@schoolclass.teacher_name} est déja pris à cette horaire"
     elsif @schoolclassesroom.any?
@@ -27,7 +34,13 @@ class SchoolClassesController < ApplicationController
          render :new, status: :unprocessable_entity
       end
     end
+  end
 
+  def destroy
+    @schoolclass = SchoolClass.find(params[:id])
+    @schoolclass.destroy
+    # No need for app/views/restaurants/destroy.html.erb
+    redirect_to school_school_classes_path(:school_id => @school.id), status: :see_other
   end
 
   private

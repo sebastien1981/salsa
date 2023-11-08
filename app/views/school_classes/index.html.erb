@@ -1,0 +1,13 @@
+<!-- app/views/restaurants/index.html.erb -->
+<ul>
+  <% @schoolclasses.each do |schoolclass| %>
+    <li><%= schoolclass.teacher_name %></li>
+    <li><%= schoolclass.day_of_week %></li>
+    <li><%= schoolclass.type_of_dance %></li>
+    <li><%= schoolclass.level %></li>
+    <li><%= schoolclass.school_name %></li>
+    <li><%= schoolclass.beginning_of_time %></li>
+    <li><%= schoolclass.end_of_time %></li>
+    <%= link_to "Supprimer cette horaire de mon école", school_school_class_path(@school,schoolclass), data: {turbo_method: :delete, turbo_confirm: "Are you sure"}  %>
+  <% end %>
+</ul>
