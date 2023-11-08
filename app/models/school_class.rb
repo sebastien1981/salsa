@@ -2,15 +2,19 @@ class SchoolClass < ApplicationRecord
   belongs_to :school
   validate :check_dates
   validates :beginning_of_time, :end_of_time, :type_of_dance, presence: true
-  validates :day_of_week, presence: true
-  #:school_name,
-
-  validate :day_of_week_existing
+  validates :day_of_week, :level, presence: true
+  #
+  validate :day_of_week_existing, :level_existing
 
 private
+def level_existing
+  unless ['Débutant', 'Inter1', 'Inter2', 'Inter/Conf', 'Confirmé']
+    errors.add(:level,notice: "must be a valid option")
+  end
+end
 def day_of_week_existing
   unless ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi']
-    errors.add(:day_of_week,"must be a valid option")
+    errors.add(:day_of_week, notice:"must be a valid option")
   end
 end
 
