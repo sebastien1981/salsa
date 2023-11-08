@@ -1,20 +1,15 @@
 <% if current_user.schools.any? %>
   <ul>
     <% current_user.schools.each do |school| %>
+        <li><%= school.name %></li>
+        <li><%= school.id %></li>
       <% if school.school_id == nil %>
-        <li><%= school.name %></li>
-        <li><%= school.id %></li>
         <%= link_to "Créer vos sites supplémentaires", schools_new_path(:school_id => school.id) %>
-        <%= link_to "Créer vos planning", new_school_school_class_path(:school_id => school.id) %>
-        <%= link_to "Acceder au listing des professeurs", school_teachers_path(:school_id => school.id) %>
-        <%= link_to "Ajouter un nouveau type de danse", new_dance_path %>
-      <% else %>
-        <li><%= school.name %></li>
-        <li><%= school.id %></li>
-        <%= link_to "Créer vos planning", new_school_school_class_path(:school_id => school.id) %>
-        <%= link_to "Acceder au listing des professeurs", school_teachers_path(:school_id => school.id) %>
-        <%= link_to "Ajouter un nouveau type de danse", new_dance_path %>
       <% end  %>
+        <%= link_to "Créer vos planning", new_school_school_class_path(:school_id => school.id) %>
+        <%= link_to "Acceder au listing des professeurs", school_teachers_path(:school_id => school.id) %>
+        <%= link_to "Ajouter un nouveau type de danse", new_dance_path %>
+        <%= link_to "Accéder au cours que vous avez créer", school_school_classes_path(:school_id => school.id) %>
     <% end %>
   </ul>
 <% else %>
