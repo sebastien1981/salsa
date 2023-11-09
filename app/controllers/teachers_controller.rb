@@ -66,12 +66,7 @@ class TeachersController < ApplicationController
 
   def advancedsearch
     @school = School.find(params[:school_id])
-    @teachers = Teacher.all
-    if params[:query].present?
-      raise
-      @teachers = @teachers.where(first_name: params[:query])
-      raise
-    end
+    @teachers = Teacher.all.order(params[:sort])
   end
   private
 
