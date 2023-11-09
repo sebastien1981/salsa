@@ -10,6 +10,7 @@
         <%= link_to "Acceder au listing des professeurs", school_teachers_path(:school_id => school.id) %>
         <%= link_to "Ajouter un nouveau type de danse", new_dance_path %>
         <%= link_to "Accéder au cours que vous avez créer", school_school_classes_path(:school_id => school.id) %>
+        <%= link_to "Accéder à votre dashboard", school_dashboard_path(:school_id => school.id) %>
     <% end %>
   </ul>
 <% else %>

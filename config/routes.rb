@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :schools do
     resources :school_classes
+    get '/dashboard', to: 'school_classes#dashboard'
     resources :teachers
     get '/advancedsearch', to: 'teachers#advancedsearch'
   end

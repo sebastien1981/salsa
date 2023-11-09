@@ -3,9 +3,6 @@ class SchoolsController < ApplicationController
     @schools = School.all
   end
 
-  def dashboard
-  end
-
   def new
     @school = School.new
   end

@@ -1,5 +1,5 @@
+<h1>Mon dashboard</h1>
 <!-- app/views/restaurants/index.html.erb -->
-<h1>Mes cours:</h1>
 <%= link_to "Acceder au listing des ecoles", root_path %>
 <ul>
   <% @schoolclasses.each do |schoolclass| %>
@@ -8,8 +8,6 @@
     <li>Type de dance: <%=  schoolclass.type_of_dance %></li>
     <li>Niveau: <%=  schoolclass.level %></li>
     <li><%= schoolclass.beginning_of_time.strftime("Heure de début: %H:%M") %></li>
-    <li><%= schoolclass.end_of_time.strftime("Heure de fin: %H:%M") %></li>
-    <%= link_to "Supprimer cette horaire de mon école", school_school_class_path(@school,schoolclass), data: {turbo_method: :delete, turbo_confirm: "Etes-vous sure de vouloir supprimer cette horaire?"}  %>
     <p></p>
-  <% end %>
 </ul>
+  <% end %>
