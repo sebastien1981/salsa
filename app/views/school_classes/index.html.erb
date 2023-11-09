@@ -1,4 +1,6 @@
 <!-- app/views/restaurants/index.html.erb -->
+<h1>Mes cours:</h1>
+<%= link_to "Acceder au listing des ecoles", root_path %>
 <ul>
   <% @schoolclasses.each do |schoolclass| %>
     <li><%= schoolclass.teacher_name %></li>
@@ -11,4 +13,3 @@
     <p></p>
   <% end %>
 </ul>
-<%= link_to "Acceder au listing des ecoles", root_path %>
