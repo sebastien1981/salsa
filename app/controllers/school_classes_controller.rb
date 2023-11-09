@@ -1,12 +1,12 @@
 class SchoolClassesController < ApplicationController
-  before_action :set_school, only: %i[index new create destroy]
+  before_action :set_school, only: %i[index new create destroy dashboard]
 
   def index
-    @schoolclasses = SchoolClass.where(school_id: @school.id)
+    @schoolclasses = SchoolClass.where(school_id: @school.id).order(:day_of_week).order(:beginning_of_time)
   end
 
-  def show
-    @schoolclass = SchoolClass.find(params[:id])
+  def dashboard
+    @schoolclasses = SchoolClass.where(school_id: @school.id).order(:day_of_week).order(:beginning_of_time)
   end
 
   def new
