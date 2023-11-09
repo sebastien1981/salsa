@@ -6,9 +6,6 @@
     <div class="col-12 col-lg-6">
       <%= simple_form_for [@school, @schoolclass] do |f| %>
         <div class="row">
-        <div class="col-8">Choisissez votre école
-            <%= select_tag :school_name,options_for_select(@nameschool.map{|c|[c.name,c.name]}), {:prompt => "--Choissisez votre école--"} %>
-          </div>
           <div class="col-8">Choisisez votre type de dance:
             <%= f.collection_select :type_of_dance, Dance.all, :fullname, :fullname,prompt: true %>
           </div>
