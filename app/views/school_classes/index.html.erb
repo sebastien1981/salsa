@@ -3,12 +3,12 @@
 <%= link_to "Acceder au listing des ecoles", root_path %>
 <ul>
   <% @schoolclasses.each do |schoolclass| %>
-    <li><%= schoolclass.teacher_name %></li>
-    <li><%= schoolclass.day_of_week %></li>
-    <li><%= schoolclass.type_of_dance %></li>
-    <li><%= schoolclass.level %></li>
-    <li><%= schoolclass.beginning_of_time %></li>
-    <li><%= schoolclass.end_of_time %></li>
+    <li>Nom du professeur: <%=  schoolclass.teacher_name %></li>
+    <li>Jour de la semaine: <%=  schoolclass.day_of_week %></li>
+    <li>Type de dance: <%=  schoolclass.type_of_dance %></li>
+    <li>Niveau: <%=  schoolclass.level %></li>
+    <li><%= schoolclass.beginning_of_time.strftime("Heure de début: %H:%M:%S") %></li>
+    <li><%= schoolclass.end_of_time.strftime("Heure de fin: %H:%M:%S") %></li>
     <%= link_to "Supprimer cette horaire de mon école", school_school_class_path(@school,schoolclass), data: {turbo_method: :delete, turbo_confirm: "Etes-vous sure de vouloir supprimer cette horaire?"}  %>
     <p></p>
   <% end %>
