@@ -6,7 +6,27 @@ class SchoolClassesController < ApplicationController
   end
 
   def dashboard
-    @schoolclasses = SchoolClass.where(school_id: @school.id).order(:day_of_week).order(:beginning_of_time)
+    @schoolclasses = SchoolClass.where(school_id: @school.id).order(:room_number).order(:day_of_week).order(:beginning_of_time)
+    roomnumber_arr = []
+    day_arr = []
+    begin_arr = []
+
+    @schoolclasses.each do |roomschool|
+      roomnumber_arr << roomschool.room_number
+    end
+    @room = roomnumber_arr.uniq
+    room_number = @room.count
+
+    # @schoolclasses.each do |dayschool|
+    #   day_arr << dayschool.day_of_week
+    # end
+    # day = day_arr.uniq
+
+    # @schoolclasses.each do |timebegin|
+    #   begin_arr << timebegin.beginning_of_time
+    # end
+    # timebegin = begin_arr.uniq
+
   end
 
   def new
