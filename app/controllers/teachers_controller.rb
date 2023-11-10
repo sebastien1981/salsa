@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :set_teacher, only: [:show, :edit, :update, :destroy, :test]
 
   def index
     @school = School.find(params[:school_id])
@@ -68,6 +68,7 @@ class TeachersController < ApplicationController
     @school = School.find(params[:school_id])
     @teachers = Teacher.all.order(params[:sort])
   end
+
   private
 
   def teacher_params
