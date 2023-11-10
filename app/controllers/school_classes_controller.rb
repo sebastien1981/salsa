@@ -17,16 +17,6 @@ class SchoolClassesController < ApplicationController
     @room = roomnumber_arr.uniq
     room_number = @room.count
 
-    # @schoolclasses.each do |dayschool|
-    #   day_arr << dayschool.day_of_week
-    # end
-    # day = day_arr.uniq
-
-    # @schoolclasses.each do |timebegin|
-    #   begin_arr << timebegin.beginning_of_time
-    # end
-    # timebegin = begin_arr.uniq
-
   end
 
   def new
