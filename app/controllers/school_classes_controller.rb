@@ -27,12 +27,10 @@ class SchoolClassesController < ApplicationController
       redirect_to new_school_school_class_path(:school_id => @school.id) ,notice: "#{@schoolclass.teacher_name} est déja pris à cette horaire"
     elsif @schoolclassesroom.any?
       redirect_to new_school_school_class_path(:school_id => @school.id) ,notice: "La salle est déja réservé à cette horaire dans cette école"
+    elsif @schoolclass.save
+      redirect_to schools_path, notice: "Votre cours a bien été crée"
     else
-      if @schoolclass.save
-        redirect_to schools_path, notice: "Votre cours a bien été crée"
-      else
-         render :new, status: :unprocessable_entity
-      end
+      render :new, status: :unprocessable_entity
     end
   end
 
