@@ -1,6 +1,9 @@
 <h1>Mon dashboard</h1>
 <!-- app/views/restaurants/index.html.erb -->
 <%= link_to "Acceder au listing des ecoles", root_path %>
+  <% @room.each do |r| %>
+    <li>Piece numero: <%= r %></li>
+  <% end %>
 <ul>
   <% @schoolclasses.each do |schoolclass| %>
     <li>Nom du professeur: <%=  schoolclass.teacher_name %></li>
@@ -8,6 +11,7 @@
     <li>Type de dance: <%=  schoolclass.type_of_dance %></li>
     <li>Niveau: <%=  schoolclass.level %></li>
     <li><%= schoolclass.beginning_of_time.strftime("Heure de début: %H:%M") %></li>
+    <li>Piece: <%= schoolclass.room_number %></li>
     <p></p>
 </ul>
   <% end %>
