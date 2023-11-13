@@ -26,6 +26,7 @@ class SchoolClassesController < ApplicationController
       begin_arr << begintime.level
       begin_arr << begintime.teacher_name
       begin_arr << begintime.type_of_dance
+      begin_arr << begintime.room_number
     end
     @begintime = begin_arr
 
