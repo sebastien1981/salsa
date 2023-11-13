@@ -3,15 +3,18 @@
 <%= link_to "Acceder au listing des ecoles", root_path %>
   <% @room.each do |r| %>
     <li>Piece numero: <%= r %></li>
+  <table>
+  <tr>
+    <th>&nbsp;</th>
+    <% @schoolday.each do |schoolday| %>
+    <th><%= schoolday %></th>
+    <% end  %>
   <% end %>
-<ul>
-  <% @schoolclasses.each do |schoolclass| %>
-    <li>Nom du professeur: <%=  schoolclass.teacher_name %></li>
-    <li>Jour de la semaine: <%=  schoolclass.day_of_week %></li>
-    <li>Type de dance: <%=  schoolclass.type_of_dance %></li>
-    <li>Niveau: <%=  schoolclass.level %></li>
-    <li><%= schoolclass.beginning_of_time.strftime("Heure de début: %H:%M") %></li>
-    <li>Piece: <%= schoolclass.room_number %></li>
-    <p></p>
-</ul>
-  <% end %>
+  </tr>
+  <tr>
+      <% @schoolclasses.each do |schoolclasses|  %>
+      <td><%= schoolclasses.beginning_of_time.strftime("%H:%M") %></td>
+      <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %></td>
+  </tr>
+      <% end  %>
+</table>

@@ -15,7 +15,19 @@ class SchoolClassesController < ApplicationController
       roomnumber_arr << roomschool.room_number
     end
     @room = roomnumber_arr.uniq
-    room_number = @room.count
+
+    @schoolclasses.each do |dayschool|
+      day_arr << dayschool.day_of_week
+    end
+    @schoolday = day_arr.uniq
+
+    @schoolclasses.each do |begintime|
+      begin_arr << begintime.beginning_of_time.strftime("%H:%M")
+      begin_arr << begintime.level
+      begin_arr << begintime.teacher_name
+      begin_arr << begintime.type_of_dance
+    end
+    @begintime = begin_arr
 
   end
 
