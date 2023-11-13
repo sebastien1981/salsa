@@ -6,10 +6,14 @@ class SchoolClassesController < ApplicationController
   end
 
   def dashboard
-    @schoolclasses = SchoolClass.where(school_id: @school.id).order(:room_number).order(:day_of_week).order(:beginning_of_time)
+    @schoolclasses = SchoolClass.where(school_id: @school.id).order(:room_number).order(:beginning_of_time).order(:day_of_week)
     roomnumber_arr = []
-    day_arr = []
-    begin_arr = []
+    day_arr_1 = []
+    day_arr_2 = []
+    day_arr_3 = []
+    begin_arr_1 = []
+    begin_arr_2 = []
+    begin_arr_3 = []
 
     @schoolclasses.each do |roomschool|
       roomnumber_arr << roomschool.room_number
@@ -17,19 +21,34 @@ class SchoolClassesController < ApplicationController
     @room = roomnumber_arr.uniq
 
     @schoolclasses.each do |dayschool|
-      day_arr << dayschool.day_of_week
+      if dayschool.room_number == 1
+        day_arr_1 << dayschool.day_of_week
+      elsif dayschool.room_number == 2
+        day_arr_2 << dayschool.day_of_week
+      else
+        day_arr_3 << dayschool.day_of_week
+      end
     end
-    @schoolday = day_arr.uniq
+    @schoolday_1 = day_arr_1.uniq
+    @schoolday_2 = day_arr_2.uniq
+    @schoolday_3 = day_arr_3.uniq
 
     @schoolclasses.each do |begintime|
-      begin_arr << begintime.beginning_of_time.strftime("%H:%M")
-      begin_arr << begintime.level
-      begin_arr << begintime.teacher_name
-      begin_arr << begintime.type_of_dance
-      begin_arr << begintime.room_number
+      if begintime.room_number == 1
+        begin_arr_1 << begintime.beginning_of_time.strftime("%H:%M")
+      elsif begintime.room_number == 2
+        begin_arr_2 << begintime.beginning_of_time.strftime("%H:%M")
+      else
+        begin_arr_3 << begintime.beginning_of_time.strftime("%H:%M")
+      end
+      # begin_arr << begintime.level
+      # begin_arr << begintime.teacher_name
+      # begin_arr << begintime.type_of_dance
+      # begin_arr << begintime.room_number
     end
-    @begintime = begin_arr
-
+    @begintime_1 = begin_arr_1.uniq
+    @begintime_2 = begin_arr_2.uniq
+    @begintime_3 = begin_arr_3.uniq
   end
 
   def new

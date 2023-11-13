@@ -1,26 +1,63 @@
 <h1>Mon dashboard</h1>
 <!-- app/views/restaurants/index.html.erb -->
 <%= link_to "Acceder au listing des ecoles", root_path %>
-  <table>
+<table>
   <tr>
-    <th>&nbsp;</th>
-    <% @schoolday.each do |schoolday| %>
-    <th><%= schoolday %></th>
+   <th>&nbsp;</th>
+    <% if @room.include?(1)  %>
+      <% @schoolday_1.each do |schoolday| %>
+        <th><%= schoolday %></th>
+      <% end %>
+    <% end %>
+  </tr>
+  <% @begintime_1.each do  | begintime | %>
+    <tr>
+    <td><%= begintime %></td>
+    <% @schoolclasses.each do |schoolclasses|  %>
+          <% if schoolclasses.room_number == 1 && schoolclasses.beginning_of_time.strftime("%H:%M").include?("10:00")  %>
+            <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %> <%= schoolclasses.room_number  %></td>
+          <% end  %>
     <% end  %>
-  </tr>
+    </tr>
+  <% end %>
+</table>
+<table>
   <tr>
-      <% @schoolclasses.each do |schoolclasses|  %>
-      <% if schoolclasses.room_number == 1  %>
-
-        <td><%= schoolclasses.beginning_of_time.strftime("%H:%M") %></td>
-        <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %> <%= schoolclasses.room_number  %></td>
-      <% elsif schoolclasses.room_number == 2 %>
-        <td><%= schoolclasses.beginning_of_time.strftime("%H:%M") %></td>
-        <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %><%= schoolclasses.room_number  %></td>
-      <% else %>
-        <td><%= schoolclasses.beginning_of_time.strftime("%H:%M") %></td>
-        <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %> <%= schoolclasses.room_number  %></td>
-      <% end  %>
+   <th>&nbsp;</th>
+    <% if @room.include?(2)  %>
+      <% @schoolday_2.each do |schoolday| %>
+        <th><%= schoolday %></th>
+      <% end %>
+    <% end %>
   </tr>
-      <% end  %>
+  <% @begintime_2.each do  | begintime | %>
+    <tr>
+    <td><%= begintime %></td>
+    <% @schoolclasses.each do |schoolclasses|  %>
+          <% if schoolclasses.room_number == 2 %>
+            <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %> <%= schoolclasses.room_number  %></td>
+          <% end  %>
+    <% end  %>
+    </tr>
+  <% end %>
+</table>
+<table>
+  <tr>
+   <th>&nbsp;</th>
+    <% if @room.include?(3)  %>
+      <% @schoolday_3.each do |schoolday| %>
+        <th><%= schoolday %></th>
+      <% end %>
+    <% end %>
+  </tr>
+  <% @begintime_3.each do  | begintime | %>
+    <tr>
+    <td><%= begintime %></td>
+    <% @schoolclasses.each do |schoolclasses|  %>
+          <% if schoolclasses.room_number == 3 %>
+            <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %> <%= schoolclasses.room_number  %></td>
+          <% end  %>
+    <% end  %>
+    </tr>
+  <% end %>
 </table>
