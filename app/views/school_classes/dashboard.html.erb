@@ -14,7 +14,9 @@
     <tr>
     <td><%= begintime %></td>
     <% @schoolclasses.each do |schoolclasses|  %>
-          <% if schoolclasses.room_number == 1 && schoolclasses.beginning_of_time.strftime("%H:%M").include?("10:00")  %>
+          <% if schoolclasses.room_number == 1 && schoolclasses.beginning_of_time.strftime("%H:%M").include?("10:00") && begintime.include?(@begintime_1[0])  %>
+            <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %> <%= schoolclasses.room_number  %></td>
+            <% elsif schoolclasses.room_number == 1 && schoolclasses.beginning_of_time.strftime("%H:%M").include?("11:00") && begintime.include?(@begintime_1[1])  %>
             <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %> <%= schoolclasses.room_number  %></td>
           <% end  %>
     <% end  %>
