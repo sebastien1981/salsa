@@ -1,20 +1,26 @@
 <h1>Mon dashboard</h1>
 <!-- app/views/restaurants/index.html.erb -->
 <%= link_to "Acceder au listing des ecoles", root_path %>
-  <% @room.each do |r| %>
-    <li>Piece numero: <%= r %></li>
   <table>
   <tr>
     <th>&nbsp;</th>
     <% @schoolday.each do |schoolday| %>
     <th><%= schoolday %></th>
     <% end  %>
-  <% end %>
   </tr>
   <tr>
       <% @schoolclasses.each do |schoolclasses|  %>
-      <td><%= schoolclasses.beginning_of_time.strftime("%H:%M") %></td>
-      <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %></td>
+      <% if schoolclasses.room_number == 1  %>
+
+        <td><%= schoolclasses.beginning_of_time.strftime("%H:%M") %></td>
+        <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %> <%= schoolclasses.room_number  %></td>
+      <% elsif schoolclasses.room_number == 2 %>
+        <td><%= schoolclasses.beginning_of_time.strftime("%H:%M") %></td>
+        <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %><%= schoolclasses.room_number  %></td>
+      <% else %>
+        <td><%= schoolclasses.beginning_of_time.strftime("%H:%M") %></td>
+        <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level  %><p> <%= schoolclasses.type_of_dance  %> <%= schoolclasses.room_number  %></td>
+      <% end  %>
   </tr>
       <% end  %>
 </table>
