@@ -8,7 +8,9 @@ class SchoolClassesController < ApplicationController
   def dashboard
     @schoolclasses = SchoolClass.where(school_id: @school.id).order(:room_number).order(:day_of_week).order(:beginning_of_time)
     roomnumber_arr = []
-    day_arr = []
+    day_arr_1 = []
+    day_arr_2 = []
+    day_arr_3 = []
     begin_arr = []
 
     @schoolclasses.each do |roomschool|
@@ -17,9 +19,17 @@ class SchoolClassesController < ApplicationController
     @room = roomnumber_arr.uniq
 
     @schoolclasses.each do |dayschool|
-      day_arr << dayschool.day_of_week
+      if dayschool.room_number == 1
+        day_arr_1 << dayschool.day_of_week
+      elsif dayschool.room_number == 2
+        day_arr_2 << dayschool.day_of_week
+      else
+        day_arr_3 << dayschool.day_of_week
+      end
     end
-    @schoolday = day_arr.uniq
+    @schoolday_1 = day_arr_1.uniq
+    @schoolday_2 = day_arr_2.uniq
+    @schoolday_3 = day_arr_3.uniq
 
     @schoolclasses.each do |begintime|
       begin_arr << begintime.beginning_of_time.strftime("%H:%M")
