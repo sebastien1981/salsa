@@ -14,6 +14,7 @@ class SchoolClassesController < ApplicationController
     begin_arr_1 = []
     begin_arr_2 = []
     begin_arr_3 = []
+    end_arr_1 = []
 
     @schoolclasses.each do |roomschool|
       roomnumber_arr << roomschool.room_number
@@ -36,6 +37,7 @@ class SchoolClassesController < ApplicationController
     @schoolclasses.each do |begintime|
       if begintime.room_number == 1
         begin_arr_1 << begintime.beginning_of_time.strftime("%H:%M")
+        end_arr_1 << begintime.end_of_time.strftime("%H:%M")
       elsif begintime.room_number == 2
         begin_arr_2 << begintime.beginning_of_time.strftime("%H:%M")
       else
@@ -43,6 +45,7 @@ class SchoolClassesController < ApplicationController
       end
     end
     @begintime_1 = begin_arr_1.uniq
+    @endtime_1 = end_arr_1[-1]
     @begintime_2 = begin_arr_2.uniq
     @begintime_3 = begin_arr_3.uniq
     #creation de ligne vide pour ajouter des blanc, mais il faut trouver l'algo qui fonctionne....
