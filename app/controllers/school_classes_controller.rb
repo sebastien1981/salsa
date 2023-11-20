@@ -6,7 +6,7 @@ class SchoolClassesController < ApplicationController
   end
 
   def dashboard
-    @schoolclasses = SchoolClass.where(school_id: @school.id).order(:room_number).order(:day_of_week)
+    @schoolclasses = SchoolClass.where(school_id: @school.id).order(:room_number).order(:beginning_of_time).order(:day_of_week)
     roomnumber_arr = []
     day_arr_1 = []
     day_arr_2 = []
@@ -45,6 +45,7 @@ class SchoolClassesController < ApplicationController
       end
     end
     @begintime_1 = begin_arr_1.uniq
+
     @endtime_1 = end_arr_1[-1]
     @begintime_2 = begin_arr_2.uniq
     @begintime_3 = begin_arr_3.uniq
@@ -111,5 +112,4 @@ class SchoolClassesController < ApplicationController
     end
     @countarr = arrtess
   end
-
 end
