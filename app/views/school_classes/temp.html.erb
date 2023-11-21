@@ -1,0 +1,13 @@
+<% @schoolday_1.each do |dayschool| %>
+          <% @schoolclasses.each do |schoolclasses| %>
+            <% if schoolclasses.room_number == 1 && schoolclasses.beginning_of_time.strftime("%H:%M").include?(@begintime_1[0]) && begintime.include?(@begintime_1[0]) && schoolclasses.day_of_week.include?(dayschool) %>
+              <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level %><p> <%= schoolclasses.type_of_dance %> <%= schoolclasses.day_of_week %></td>
+            <% elsif schoolclasses.room_number == 1 && schoolclasses.beginning_of_time.strftime("%H:%M").include?(@begintime_1[1]) && begintime.include?(@begintime_1[1]) && schoolclasses.day_of_week.include?(dayschool) %>
+              <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level %><p> <%= schoolclasses.type_of_dance %> <%= schoolclasses.day_of_week %></td>
+            <% elsif schoolclasses.room_number == 1 && schoolclasses.beginning_of_time.strftime("%H:%M").include?(@begintime_1[2]) && begintime.include?(@begintime_1[2]) && schoolclasses.day_of_week.include?(dayschool) %>
+              <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level %><p> <%= schoolclasses.type_of_dance %> <%= schoolclasses.day_of_week %></td>
+            <% elsif schoolclasses.room_number == 1 && schoolclasses.beginning_of_time.strftime("%H:%M").include?(@begintime_1[3]) && begintime.include?(@begintime_1[3]) && schoolclasses.day_of_week.include?(dayschool) %>
+              <td><%= schoolclasses.teacher_name %><p><%= schoolclasses.level %><p> <%= schoolclasses.type_of_dance %> <%= schoolclasses.day_of_week %></td>
+            <% end %>
+          <% end %>
+        <% end %>
