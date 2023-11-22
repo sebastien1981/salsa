@@ -14,19 +14,14 @@ class SchoolClassesController < ApplicationController
     @room = roomnumber_arr.uniq
     roomcount = @room.count
 
-#     window = {}
-# 5.times do |i|
-#   window["test_#{i}"]=[]
-# end
-
-    # x = 1
-    # for n in 0..roomcount
-    #   day_arr_"#{x}"= []
-    #   # array_set("begin_arr_#{x}", [])
-    #   # array_set("end_arr_#{x}", [])
-    #   x += 1
-    # end
-
+    x = 1
+    for n in 0..roomcount
+      day_arr = []
+      instance_variable_set("@day_arr_#{x}", day_arr)
+      instance_variable_set("@begin_arr_#{x}", day_arr)
+      instance_variable_set("@end_arr_#{x}", day_arr)
+      x += 1
+    end
 
     day_arr_1 = []
     begin_arr_1 = []
