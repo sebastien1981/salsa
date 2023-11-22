@@ -68,24 +68,45 @@ class SchoolClassesController < ApplicationController
         end
       end
 
-      # @countday = @schoolday_1.count - 1
-      # for i in 0..@countday do
-      #   if(arr_cours_h1[i].day_of_week != @schoolday_1[i])
-      #     arr_cours_h1.insert(i,"")
-      #   end
-      # end
-      # for i in 0..@countday do
-      #   if(arr_cours_h2[i].day_of_week != @schoolday_1[i])
-      #     arr_cours_h2.insert(i,"")
-      #   end
-      # end
+      @countday = @schoolday_1.count - 1
+      for i in 0..@countday do
+        if(arr_cours_h1[i] == nil)
+          arr_cours_h1.insert(i, "")
+        elsif(arr_cours_h1[i].day_of_week != @schoolday_1[i])
+          arr_cours_h1.insert(i, "")
+        end
+      end
 
-      @cours_h2 = arr_cours_h2
+      for i in 0..@countday do
+        if(arr_cours_h2[i] == nil)
+          arr_cours_h2.insert(i, "")
+        elsif(arr_cours_h2[i].day_of_week != @schoolday_1[i])
+          arr_cours_h2.insert(i, "")
+        end
+      end
+
+      for i in 0..@countday do
+        if(arr_cours_h3[i] == nil)
+          arr_cours_h3.insert(i, "")
+        elsif(arr_cours_h3[i].day_of_week != @schoolday_1[i])
+          arr_cours_h3.insert(i, "")
+        end
+      end
+
+      for i in 0..@countday do
+        if(arr_cours_h4[i] == nil)
+          arr_cours_h4.insert(i, "")
+        elsif(arr_cours_h4[i].day_of_week != @schoolday_1[i])
+          arr_cours_h4.insert(i, "")
+        end
+      end
+
       @cours_h1 = arr_cours_h1
-      
+      @cours_h2 = arr_cours_h2
+      @cours_h3 = arr_cours_h3
+      @cours_h4 = arr_cours_h4
+
     #@schoolday_1
-    @cours_h3 = arr_cours_h3
-    @cours_h4 = arr_cours_h4
     #creation de ligne vide pour ajouter des blanc, mais il faut trouver l'algo qui fonctionne....
   end
 
