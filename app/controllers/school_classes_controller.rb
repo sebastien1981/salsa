@@ -12,97 +12,128 @@ class SchoolClassesController < ApplicationController
       roomnumber_arr << roomschool.room_number
     end
     @room = roomnumber_arr.uniq
-    roomcount = @room.count
+    roomcount = @room.count - 1
 
-    x = 1
-    for n in 0..roomcount
-      day_arr = []
-      instance_variable_set("@day_arr_#{x}", day_arr)
-      instance_variable_set("@begin_arr_#{x}", day_arr)
-      instance_variable_set("@end_arr_#{x}", day_arr)
-      x += 1
-    end
+    #ajouter une boucle for or for each pour avoir n room pour n horaires etc...
+    for w in 0..roomcount
 
-    day_arr_1 = []
-    begin_arr_1 = []
-    end_arr_1 = []
-    # day_arr_2 = []
-    # day_arr_3 = []
-    # begin_arr_2 = []
-    # begin_arr_3 = []
-    # end_arr_2 = []
-    # end_arr_3 = []
-
-
-    @schoolclasses.each do |schoolclass|
-      if schoolclass.room_number == @room[0]
-        day_arr_1 << schoolclass.day_of_week
-        begin_arr_1 << schoolclass.beginning_of_time.strftime("%H:%M")
-        end_arr_1 << schoolclass.end_of_time.strftime("%H:%M")
-      # elsif schoolclass.room_number == 2
-      #   day_arr_2 << schoolclass.day_of_week
-      #   begin_arr_2 << schoolclass.beginning_of_time.strftime("%H:%M")
-      #   end_arr_2 << schoolclass.end_of_time.strftime("%H:%M")
-      # else
-      #   day_arr_3 << schoolclass.day_of_week
-      #   begin_arr_3 << schoolclass.beginning_of_time.strftime("%H:%M")
-      #   end_arr_3 << schoolclass.end_of_time.strftime("%H:%M")
+      x = 1
+      for n in 0..roomcount
+        instance_variable_set("@day_arr_#{x}", [])
+        instance_variable_set("@begin_arr_#{x}", [])
+        instance_variable_set("@end_arr_#{x}", [])
+        x += 1
       end
-    end
 
-    @endtime_1 = end_arr_1[-1]
-    @schoolday_1 = day_arr_1.uniq
-    @begintime_1 = begin_arr_1.uniq
+      #a supprimer a la fin de l'indus
+      day_arr_1 = []
+      begin_arr_1 = []
+      end_arr_1 = []
+      # day_arr_2 = []
+      # day_arr_3 = []
+      # begin_arr_2 = []
+      # begin_arr_3 = []
+      # end_arr_2 = []
+      # end_arr_3 = []
 
-    # @endtime_2 = end_arr_2[-1]
-    # @schoolday_2 = day_arr_2.uniq
-    # @begintime_2 = begin_arr_2.uniq
-
-    # @endtime_3 = end_arr_3[-1]
-    # @schoolday_3 = day_arr_3.uniq
-    # @begintime_3 = begin_arr_3.uniq
-
-    arr_cours_h1 = []
-    arr_cours_h2 = []
-    arr_cours_h3 = []
-    arr_cours_h4 = []
-
+      v = 1
       @schoolclasses.each do |schoolclass|
-        if ( schoolclass.beginning_of_time.strftime("%H:%M").include?(@begintime_1[0]) && schoolclass.room_number == @room[0])
-              arr_cours_h1 << schoolclass
-        elsif(schoolclass.beginning_of_time.strftime("%H:%M").include?(@begintime_1[1]) && schoolclass.room_number == @room[0])
-              arr_cours_h2 << schoolclass
-        elsif(schoolclass.beginning_of_time.strftime("%H:%M").include?(@begintime_1[2]) && schoolclass.room_number == @room[0])
-          arr_cours_h3 << schoolclass
-        elsif(schoolclass.beginning_of_time.strftime("%H:%M").include?(@begintime_1[3]) && schoolclass.room_number == @room[0])
-          arr_cours_h4 << schoolclass
+        if schoolclass.room_number == @room[w]
+          day_arr_1 << schoolclass.day_of_week
+          begin_arr_1 << schoolclass.beginning_of_time.strftime("%H:%M")
+          end_arr_1 << schoolclass.end_of_time.strftime("%H:%M")
+
+          @day_arr_1 << schoolclass.day_of_week
+          @begin_arr_1 << schoolclass.beginning_of_time.strftime("%H:%M")
+          @end_arr_1 << schoolclass.end_of_time.strftime("%H:%M")
+          v += 1
+          # elsif schoolclass.room_number == 2
+          #   day_arr_2 << schoolclass.day_of_week
+          #   begin_arr_2 << schoolclass.beginning_of_time.strftime("%H:%M")
+          #   end_arr_2 << schoolclass.end_of_time.strftime("%H:%M")
+          # else
+          #   day_arr_3 << schoolclass.day_of_week
+          #   begin_arr_3 << schoolclass.beginning_of_time.strftime("%H:%M")
+          #   end_arr_3 << schoolclass.end_of_time.strftime("%H:%M")
         end
       end
 
-      @countday = @schoolday_1.count - 1
-      t = [arr_cours_h1, arr_cours_h2, arr_cours_h3, arr_cours_h4]
-      a = t.count - 1
+      @endtime_1 = end_arr_1[-1]
+      @schoolday_1 = day_arr_1.uniq
+      @begintime_1 = begin_arr_1.uniq
+      #raise
 
-      for j in 0..a
-      k = t
-        for i in 0..@countday do
-          if(k[j][i] == nil)
-            k[j].insert(i, "")
-          elsif(k[j][i].day_of_week != @schoolday_1[i])
-            k[j].insert(i, "")
+      # @endtime_2 = end_arr_2[-1]
+      # @schoolday_2 = day_arr_2.uniq
+      # @begintime_2 = begin_arr_2.uniq
+
+      # @endtime_3 = end_arr_3[-1]
+      # @schoolday_3 = day_arr_3.uniq
+      # @begintime_3 = begin_arr_3.uniq
+
+      arr_cours_h1 = []
+      arr_cours_h2 = []
+      arr_cours_h3 = []
+      arr_cours_h4 = []
+
+      # @countbegintime = @begintime_1.count - 1
+      # @countclass = @schoolclasses.count - 1
+
+      # for countbegintime in 0..@countbegintime
+      #   for countclass in 0..@countclass
+      #     time_condition = @schoolclasses[countclass].beginning_of_time.strftime("%H:%M").include?(@begintime_1[countbegintime])
+
+      #     if time_condition
+      #       # Use an array to store the result instead of creating individual variables
+      #       arr_cours_h = SchoolClass.where(school_id: @school.id).where(beginning_of_time: @begintime_1[countbegintime])
+      #       instance_variable_set("@arr_cours_h#{countbegintime}", arr_cours_h)
+      #       #arr_cours_h"#{countbegintime}" << arr_cours_h
+      #     end
+      #   end
+      # end
+      #raise
+
+      @schoolclasses.each do |schoolclass|
+      #for i in 0..countbegintime
+        if ( schoolclass.beginning_of_time.strftime("%H:%M").include?(@begintime_1[0]) && schoolclass.room_number == @room[w])
+          arr_cours_h1 << schoolclass
+        elsif(schoolclass.beginning_of_time.strftime("%H:%M") == @begintime_1[1] && schoolclass.room_number == @room[w])
+          arr_cours_h2 << schoolclass
+          elsif(schoolclass.beginning_of_time.strftime("%H:%M") == @begintime_1[2] && schoolclass.room_number == @room[w])
+            arr_cours_h3 << schoolclass
+          elsif(schoolclass.beginning_of_time.strftime("%H:%M") == @begintime_1[3] && schoolclass.room_number == @room[w])
+            arr_cours_h4 << schoolclass
+          end
+        end
+      #end
+
+      @countday = @schoolday_1.count - 1
+      classdance = [arr_cours_h1, arr_cours_h2, arr_cours_h3, arr_cours_h4]
+      @countarray = classdance.count - 1
+
+
+      for countarray in 0..@countarray
+        for countday in 0..@countday do
+          if(classdance[countarray][countday] == nil)
+            classdance[countarray].insert(countday, "")
+          elsif(classdance[countarray][countday].day_of_week != @schoolday_1[countday])
+            classdance[countarray].insert(countday, "")
           end
         end
       end
+      #raise
 
-        scount = t.count - 1
+
+        #scount = t.count - 1
         x = 1
-
-        for i in 0..scount
-          instance_variable_set("@cours_h#{x}", t[i].insert(0, @begintime_1[i]))
+        # ajoute l'horaire pour chaque element
+        for countarray in 0..@countarray
+          instance_variable_set("@cours_h#{x}", classdance[countarray].insert(0, @begintime_1[countarray]))
           x += 1
         end
 
       @v = @cours_h1.count - 1
+    end
   end
 
   def new

@@ -72,3 +72,31 @@
   <% end %>
 </table> -->
 
+for countbegintime in 0..@countbegintime
+  for countclass in 0..@countclass
+    time_condition = @schoolclasses[countclass].beginning_of_time.strftime("%H:%M").include?(@begintime_1[countbegintime])
+
+    if time_condition
+      # Use an array to store the result instead of creating individual variables
+      arr_cours_h = SchoolClass.where(school_id: @school.id).where(beginning_of_time: @begintime_1[countbegintime])
+      instance_variable_set("@arr_cours_h#{countbegintime}", arr_cours_h)
+    end
+  end
+end
+
+User
+@countbegintime = @begintime_1.count - 1
+@countclass = @schoolclasses.count - 1
+
+for countbegintime in 0..@countbegintime
+  for countclass in 0..@countclass
+    time_condition = @schoolclasses[countclass].beginning_of_time.strftime("%H:%M").include?(@begintime_1[countbegintime])
+
+    if time_condition
+    # Initialize an array to store the results
+    @arr_cours_h"#{countbegintime}" = []
+      # Add the result to the array
+      @arr_cours_h"#{countbegintime}" << SchoolClass.where(beginning_of_time: @begintime_1[countbegintime])
+    end
+  end
+end
