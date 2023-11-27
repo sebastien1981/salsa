@@ -12,13 +12,13 @@ class SchoolClassesController < ApplicationController
       roomnumber_arr << roomschool.room_number
     end
     @room = roomnumber_arr.uniq
-    roomcount = @room.count - 1
+    @roomcount = @room.count - 1
 
     #ajouter une boucle for or for each pour avoir n room pour n horaires etc...
-    for w in 0..roomcount
+    for w in 0..@roomcount
 
       x = 1
-      for n in 0..roomcount
+      for n in 0..@roomcount
         instance_variable_set("@day_arr_#{x}", [])
         instance_variable_set("@begin_arr_#{x}", [])
         instance_variable_set("@end_arr_#{x}", [])
@@ -133,7 +133,7 @@ class SchoolClassesController < ApplicationController
         end
       end
 
-       
+
         x = 1
         # ajoute l'horaire pour chaque element
         for countarray in 0..@countarray

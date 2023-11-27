@@ -1,29 +1,31 @@
 <h1>Mon dashboard</h1>
 <!-- app/views/restaurants/index.html.erb -->
 <%= link_to "Acceder au listing des ecoles", root_path %>
-<% if @room.include?(@room[0]) %>
+<% for u in 0..@roomcount  %>
+
+<% if @room.include?(@room[u]) %>
   <table border="1px solid black">
     <tr>
       <th>&nbsp;</th>
-        <% @schoolday_1.each do |schoolday| %>
-          <th><%= schoolday %></th>
-        <% end %>
+      <% @schoolday_1.each do |schoolday| %>
+        <th><%= schoolday %></th>
+      <% end %>
     </tr>
-      <tr >
-      <% for i in 0..@danceclasscount  %>
-
-        <td><%= @danceclass[i][0] %></td>
-        <% for t in 1..@v  %>
-         <% if @danceclass[i][t] == "" %>
-            <td>&nbsp;</td>
-          <% else %>
+    <tr >
+    <% for i in 0..@danceclasscount  %>
+      <td><%= @danceclass[i][0] %></td>
+      <% for t in 1..@v  %>
+        <% if @danceclass[i][t] == "" %>
+          <td>&nbsp;</td>
+        <% else %>
           <td><%= @danceclass[i][t].level %><p><%= @danceclass[i][t].teacher_name %><p><%= @danceclass[i][t].type_of_dance %><p><%= @danceclass[i][t].day_of_week %></td>
         <% end %>
-        <% end  %>
-      </tr>
-      <% end %>
+      <% end  %>
+    </tr>
+    <% end %>
   <tr>
     <td><%= @endtime %></td>
   </tr>
-</table>
+  </table>
+<% end %>
 <% end %>
