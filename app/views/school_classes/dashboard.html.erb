@@ -10,46 +10,20 @@
         <% end %>
     </tr>
       <tr >
-        <td><%= @cours_h1[0] %></td>
+      <% for i in 0..@danceclasscount  %>
+
+        <td><%= @danceclass[i][0] %></td>
         <% for t in 1..@v  %>
-          <td><%= @cours_h1[t].level %><p><%= @cours_h1[t].teacher_name %><p><%= @cours_h1[t].type_of_dance %><p><%= @cours_h1[t].day_of_week %></td>
-        <% end  %>
-      </tr>
-      <tr >
-        <td><%= @cours_h2[0] %></td>
-        <% for t in 1..@v  %>
-          <% if @cours_h2[t] == "" %>
+         <% if @danceclass[i][t] == "" %>
             <td>&nbsp;</td>
           <% else %>
-
-            <td><%= @cours_h2[t].level %><p><%= @cours_h2[t].teacher_name %><p><%= @cours_h2[t].type_of_dance %><p><%= @cours_h2[t].day_of_week %></td>
-          <% end %>
+          <td><%= @danceclass[i][t].level %><p><%= @danceclass[i][t].teacher_name %><p><%= @danceclass[i][t].type_of_dance %><p><%= @danceclass[i][t].day_of_week %></td>
+        <% end %>
         <% end  %>
       </tr>
-      <tr >
-        <td><%= @cours_h3[0] %></td>
-        <% for t in 1..@v  %>
-          <% if @cours_h3[t] == "" %>
-            <td>&nbsp;</td>
-          <% else %>
-
-            <td><%= @cours_h3[t].level %><p><%= @cours_h3[t].teacher_name %><p><%= @cours_h3[t].type_of_dance %><p><%= @cours_h3[t].day_of_week %></td>
-          <% end %>
-        <% end  %>
-      </tr>
-      <tr >
-        <td><%= @cours_h4[0] %></td>
-        <% for t in 1..@v  %>
-          <% if @cours_h4[t] == "" %>
-            <td>&nbsp;</td>
-          <% else %>
-
-            <td><%= @cours_h4[t].level %><p><%= @cours_h4[t].teacher_name %><p><%= @cours_h4[t].type_of_dance %><p><%= @cours_h4[t].day_of_week %></td>
-          <% end %>
-        <% end  %>
-      </tr>
+      <% end %>
   <tr>
-    <td><%= @endtime_1 %></td>
+    <td><%= @endtime %></td>
   </tr>
 </table>
 <% end %>
