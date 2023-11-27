@@ -150,7 +150,6 @@ class SchoolClassesController < ApplicationController
           current_element = @danceclass[countarray][countday]
 
           if current_element.nil? || current_element.day_of_week != schoolday[countday]
-            raise
             #modifier cette ligne de code pour inserer les elements vide
             @danceclass[countarray].insert(countday,"")
 
